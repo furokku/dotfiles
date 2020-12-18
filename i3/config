@@ -51,7 +51,6 @@ no_focus [window_role="pop-up"]
 ## bindsym $mod+Tab focus right
 
 # floating
-for_window [class="(?igwenview"] floating enable
 for_window [class="(?i)gwenview"] floating enable
 for_window [class="(?i)dolphin"] floating enable
 for_window [class="MPlayer"] floating enable
@@ -242,6 +241,7 @@ set $ws10 "10"
 ## set $ws13 "13"
 ## set $ws14 "14"
 ## set $ws15 "15"
+set $privatews "999"
 
 # app binding to workspaces
 ## assign [class="konsole"] 4
@@ -270,6 +270,7 @@ bindsym $mod+0 workspace number $ws10
 ## bindsym $mod+F3 workspace number $ws13
 ## bindsym $mod+F4 workspace number $ws14
 ## bindsym $mod+F5 workspace number $ws15
+bindsym $mod+F8 workspace number $privatews
 
 # move focused container to workspace
 bindsym $mod+Shift+1 move container to workspace number $ws1
@@ -339,4 +340,5 @@ bar {
         tray_output primary
         separator_symbol ":"
         position top
+        workspace_buttons no
 }
