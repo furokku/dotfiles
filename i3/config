@@ -13,9 +13,10 @@ set $mod Mod1
 
 # only show gaps when at least one window exists
 ## smart_gaps on
+## smart_borders on
 
 # oneko :D
-exec --no-startup-id oneko
+## exec --no-startup-id oneko
 
 # window splitting
 default_orientation horizontal
@@ -28,11 +29,11 @@ hide_edge_borders both
 gaps inner 8
 gaps outer 0 
 
-# color defines for zenburn styled i3
+# color defines for i3
 set $bg     #3c3836
 set $fg     #9f9f9f
 set $hi     #efef8f
-set $ac     #ffa500
+set $ac     #42C9FF
 set $tx     #040404
 set $ia     #8f8f8f
 set $be     #8faf9f
@@ -41,10 +42,10 @@ set $gn     #88b090
 set $rd     #ff0000
 
 # set some nice colors      border     background  text     indicator
-client.focused              $ac        $ac         $tx      $ac
-client.unfocused            $bg        $bg         $ia      $ac
-client.focused_inactive     $bg        $bg         $ac      $ac
-client.urgent               $rd        $rd         $tx      $ac
+client.focused              $ac        $ac         $tx      $bg
+client.unfocused            $bg        $bg         $ia      $bg
+client.focused_inactive     $bg        $bg         $ac      $bg
+client.urgent               $rd        $rd         $tx      $bg
 
 # no window titlebar
 for_window [class=".*"] border pixel 4
@@ -251,7 +252,7 @@ set $privatews "999"
 
 # app binding to workspaces
 ## assign [class="konsole"] 4
-assign [class="viber"] 10
+assign [class="viber"] 3
 assign [class="teams"] 10
 assign [class="Spotify"] 9
 
