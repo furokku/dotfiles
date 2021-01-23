@@ -1,0 +1,3 @@
+configuration {
+	theme: "/home/furokku/.config/rofi/themes/onedark.rasi";
+}
