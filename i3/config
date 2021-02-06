@@ -18,22 +18,18 @@ gaps inner 6
 gaps outer 2 
 
 # color defines for i3
-set $bg     #3c3836
-set $fg     #9f9f9f
-set $hi     #efef8f
-set $ac     #fcfcfc
-set $tx     #040404
-set $ia     #8f8f8f
-set $be     #8faf9f
-set $yw     #ccdc90
-set $gn     #88b090
-set $rd     #ff0000
+set $grayd       #282828
+set $grayl       #9f9f9f
+set $yellowl     #efef8f
+set $white       #fcfcfc
+set $greend      #040404
+set $red         #ff0000
 
 # set some nice colors      border     background  text     indicator
-client.focused              $ac        $ac         $tx      $bg
-client.unfocused            $bg        $bg         $ia      $bg
-client.focused_inactive     $bg        $bg         $ac      $bg
-client.urgent               $rd        $rd         $tx      $bg
+client.focused              $white     $white      $grayl   $white
+client.unfocused            $grayd     $grayd      $grayl   $grayd
+client.focused_inactive     $grayd     $grayd      $grayl   $grayd
+client.urgent               $red       $red        $white   $red
 
 # no window titlebar
 for_window [class=".*"] border pixel 4
@@ -45,17 +41,22 @@ for_window [class=".*"] border pixel 4
 # for_window
 for_window                   [class="(?i)nautilus"    ]    floating enable
 for_window                   [class="(?i)nautilus"    ]    border pixel 0
-for_window                   [class="(?i)sxiv"        ]    floating enable
-for_window                   [class="(?i)mplayer"     ]    floating enable
-for_window                   [class="(?i)viber"       ]    floating enable
-for_window                   [class="(?i)pavucontrol" ]    floating enable
-for_window                   [class="(?i)gedit"       ]    floating enable
+for_window                   [class="Gedit"           ]    floating enable
+for_window                   [class="Gedit"           ]    border pixel 0
+
+for_window                   [class="MPlayer"         ]    floating enable
+for_window                   [class="ViberPC"         ]    floating enable
+for_window                   [class="Pavucontrol"     ]    floating enable
 for_window                   [class="Telegram"        ]    floating enable
+for_window                   [class="Spotify"         ]    floating enable
+for_window                   [class="Sxiv"            ]    floating enable
+
 assign                       [class="Microsoft Teams" ]    9
 assign                       [class="Spotify"         ]    8
-assign                       [class="(?i)viber"       ]    3
-assign                       [class="(?i)discord"     ]    2
+assign                       [class="Viber"           ]    3
+assign                       [class="discord"         ]    2
 assign                       [class="Telegram"        ]    8
+
 bindsym $mod+g               [urgent=latest           ]    focus
 
 # brightness
@@ -82,6 +83,7 @@ $exec                        flameshot
 $exec                        discord-canary
 $exec                        viber
 $exec                        /usr/lib/polkit/gnome/polkit-gnome-authentication-agent-1
+$exec                        xrandr --output eDP-1-1 --off
 
 exec_always                  feh --bg-tile /home/furokku/.config/i3/wallpaper/tiled8.png
 exec_always                  ~/bin/autotiling
@@ -154,7 +156,7 @@ bindsym $mod+v               split v
 # fullscreen, toggle tiling / floating and change focus between them
 bindsym $mod+f               fullscreen  toggle
 bindsym $mod+Shift+space     floating    toggle
-bindsym $mod+space           focus       mode_toggle
+bindsym $mod+Tab             focus       mode_toggle
 
 # Define names for default workspaces for which we configure key bindings later on.
 # We use variables to avoid repeating the names in multiple places.
@@ -168,6 +170,7 @@ set $ws7    "7"
 set $ws8    "8"
 set $ws9    "9"
 set $ws10   "10"
+set $ws11   "11"
 
 # switch to workspace
 bindsym $mod+1               workspace number $ws1
@@ -180,6 +183,7 @@ bindsym $mod+7               workspace number $ws7
 bindsym $mod+8               workspace number $ws8
 bindsym $mod+9               workspace number $ws9
 bindsym $mod+0               workspace number $ws10
+bindsym $mod+F5              workspace number $ws11
 
 # move focused container to workspace
 bindsym $mod+Shift+1         move container to workspace number $ws1
@@ -192,6 +196,7 @@ bindsym $mod+Shift+7         move container to workspace number $ws7
 bindsym $mod+Shift+8         move container to workspace number $ws8
 bindsym $mod+Shift+9         move container to workspace number $ws9
 bindsym $mod+Shift+0         move container to workspace number $ws10
+bindsym $mod+Shift+F5        move container to workspace number $ws11
 
 # reload the configuration file
 bindsym $mod+Shift+c         reload
