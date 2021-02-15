@@ -13,9 +13,13 @@ set $exec exec --no-startup-id
 # oneko :D
 # exec --no-startup-id oneko
 
+# smort things
+#smart_borders on
+#smart_gaps    on
+
 # gaps
-gaps inner 6
-gaps outer 2 
+gaps inner 5
+gaps outer 2
 
 # color defines for i3
 set $grayd       #282828
@@ -50,12 +54,15 @@ for_window                   [class="Pavucontrol"     ]    floating enable
 for_window                   [class="Telegram"        ]    floating enable
 for_window                   [class="Spotify"         ]    floating enable
 for_window                   [class="Sxiv"            ]    floating enable
+for_window                   [class="Element"         ]    floating enable
+for_window                   [class="VirtualBox Machine"]  floating enable
 
 assign                       [class="Microsoft Teams" ]    9
 assign                       [class="Spotify"         ]    8
 assign                       [class="Viber"           ]    3
 assign                       [class="discord"         ]    2
-assign                       [class="Telegram"        ]    8
+assign                       [class="Telegram"        ]    3
+assign                       [class="Element"         ]    3
 
 bindsym $mod+g               [urgent=latest           ]    focus
 
@@ -77,14 +84,14 @@ bindsym XF86AudioNext        $exec playerctl next
 # x11 stuff and start things on boot
 $exec                        xrdb ~/.Xresources
 $exec                        picom
-$exec                        dunst -conf ~/.config/dunst/dunstrc
-$exec                        steam -silent
+#$exec                        steam -silent
 $exec                        flameshot
 $exec                        discord-canary
 $exec                        viber
-$exec                        /usr/lib/polkit/gnome/polkit-gnome-authentication-agent-1
+$exec                        /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 $exec                        xrandr --output eDP-1-1 --off
 
+exec_always                  ~/.config/dunst/launch.sh
 exec_always                  feh --bg-tile /home/furokku/.config/i3/wallpaper/tiled8.png
 exec_always                  ~/bin/autotiling
 
@@ -93,6 +100,11 @@ bindsym $mod+Home            $exec i3-keyboard-layout cycle us ua ru
 bindsym $mod+d               $exec rofi -show run
 bindsym Print                $exec flameshot gui
 bindsym $mod+b               $exec chromium
+
+# redshift
+bindsym $mod+z               $exec redshift -O 4500K
+bindsym $mod+x               $exec redshift -x
+# bindsym $mod+c               $exec redshift
 
 # move focused workspace
 bindsym $mod+p               move workspace to output right
