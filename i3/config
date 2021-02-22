@@ -84,16 +84,13 @@ bindsym XF86AudioNext        $exec playerctl next
 # x11 stuff and start things on boot
 $exec                        xrdb ~/.Xresources
 $exec                        picom
+$exec                        /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
+$exec                        xrandr --output eDP-1-1 --off
+
 #$exec                        steam -silent
 $exec                        flameshot
 $exec                        discord-canary
 $exec                        viber
-$exec                        /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
-$exec                        xrandr --output eDP-1-1 --off
-
-exec_always                  ~/.config/dunst/launch.sh
-exec_always                  feh --bg-tile /home/furokku/.config/i3/wallpaper/tiled8.png
-exec_always                  ~/bin/autotiling
 
 # exec things
 bindsym $mod+Home            $exec i3-keyboard-layout cycle us ua ru
@@ -253,5 +250,8 @@ bindsym $mod+r               mode "resize"
 #         position             top
 #  }
 
-# polybar
+# polybar, dunst, feh and a random script i found on the internet that tiles my windows
 exec_always                  ~/.config/polybar/launch.sh
+exec_always                  ~/.config/dunst/launch.sh
+exec_always                  feh --bg-tile /home/furokku/.config/i3/wallpaper/tiled8.png
+exec_always                  ~/.local/bin/autotiling
