@@ -1,4 +1,4 @@
-background_opacity: 0.9
+background_opacity: 0.85
 
 env:
   TERM: xterm-256color
@@ -9,22 +9,24 @@ window:
     y: 3
   title: Alacritty
 
+cursor:
+  style:
+    shape: Block
+    blinking: On
+    blink_rate: 3
+
 font:
-
   normal:
-    family: "MesloLGS NF"
-
-  normal:
-    family: Ubuntu Mono derivative Powerline
+    family: UbuntuMono
     style: Regular
   bold:
-    family: Ubuntu Mono derivative Powerline
+    family: Ubuntu Mono
     style: Bold
   italic:
-    family: Ubuntu Mono derivative Powerline
+    family: Ubuntu Mono
     style: Italic
   bold_italic:
-    family: Ubuntu Mono derivative Powerline
+    family: Ubuntu Mono
     style: Bold Italic
   size: 12
 
