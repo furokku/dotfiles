@@ -18,8 +18,8 @@ set $exec exec --no-startup-id
 #smart_gaps    on
 
 # gaps
-gaps inner 7
-gaps outer 4
+gaps inner 4
+gaps outer 2
 
 # color defines for i3
 set $grayd       #282828
