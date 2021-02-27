@@ -256,5 +256,5 @@ bindsym $mod+r               mode "resize"
 exec_always                  ~/.config/polybar/launch.sh
 exec_always                  ~/.config/dunst/launch.sh
 exec_always                  ~/.local/bin/autotiling
-exec_always                  feh --bg-scale /home/furokku/.config/i3/wallpaper/wallhaven-dg9o7l.jpg
+exec_always                  feh --bg-fill /home/furokku/.config/i3/wallpaper/wallhaven-dg9o7l.jpg
 exec_always                  picom
