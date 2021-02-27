@@ -38,6 +38,7 @@ client.urgent               $red       $red        $white   $red
 
 # window titlebar
 for_window [class=".*"] border pixel 3
+for_window [floating  ] border normal
 
 # focus for things
 ## no_focus [window_role="pop-up"]
@@ -94,6 +95,7 @@ $exec                        flameshot
 $exec                        discord-canary
 $exec                        viber
 
+
 # exec things
 bindsym $mod+Home            $exec i3-keyboard-layout cycle us ua ru
 bindsym $mod+d               $exec rofi -show run
@@ -111,7 +113,7 @@ bindsym $mod+p               move workspace to output right
 bindsym $mod+o               move workspace to output left
 
 # betterlockscreen
-bindsym $mod+l $exec         loginctl lock-session
+bindsym $mod+l               $exec loginctl lock-session
 $exec                        xss-lock blslock
 
 # app launching mode
@@ -253,5 +255,5 @@ bindsym $mod+r               mode "resize"
 # polybar, dunst, feh and a random script i found on the internet that tiles my windows
 exec_always                  ~/.config/polybar/launch.sh
 exec_always                  ~/.config/dunst/launch.sh
-exec_always                  feh --bg-tile /home/furokku/.config/i3/wallpaper/tiled8.png
+exec_always                  feh --bg-scale /home/furokku/.config/i3/wallpaper/wallhaven-dg9o7l.jpg
 exec_always                  ~/.local/bin/autotiling
