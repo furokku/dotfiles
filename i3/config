@@ -252,8 +252,9 @@ bindsym $mod+r               mode "resize"
 #         position             top
 #  }
 
-# polybar, dunst, feh and a random script i found on the internet that tiles my windows
+# polybar, picom, dunst, feh and a random script i found on the internet that tiles my windows
 exec_always                  ~/.config/polybar/launch.sh
 exec_always                  ~/.config/dunst/launch.sh
-exec_always                  feh --bg-scale /home/furokku/.config/i3/wallpaper/wallhaven-dg9o7l.jpg
 exec_always                  ~/.local/bin/autotiling
+exec_always                  feh --bg-scale /home/furokku/.config/i3/wallpaper/wallhaven-dg9o7l.jpg
+exec_always                  picom
