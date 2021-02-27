@@ -18,25 +18,26 @@ set $exec exec --no-startup-id
 #smart_gaps    on
 
 # gaps
-gaps inner 5
-gaps outer 2
+gaps inner 7
+gaps outer 4
 
 # color defines for i3
 set $grayd       #282828
 set $grayl       #9f9f9f
 set $yellowl     #efef8f
 set $white       #fcfcfc
-set $greend      #040404
+set $green       #040404
 set $red         #ff0000
+set $blue        #4192f0
 
 # set some nice colors      border     background  text     indicator
-client.focused              $white     $white      $grayl   $white
-client.unfocused            $grayd     $grayd      $grayl   $grayd
-client.focused_inactive     $grayd     $grayd      $grayl   $grayd
-client.urgent               $red       $red        $white   $red
+client.focused              $white     $white      $grayd   $white
+client.unfocused            $grayl     $grayl      $white   $grayl
+client.focused_inactive     $grayl     $grayl      $white   $grayl
+client.urgent               $red       $red        $white   $red  
 
-# no window titlebar
-for_window [class=".*"] border pixel 4
+# window titlebar
+for_window [class=".*"] border pixel 3
 
 # focus for things
 ## no_focus [window_role="pop-up"]
@@ -57,7 +58,7 @@ for_window                   [class="Sxiv"            ]    floating enable
 for_window                   [class="Element"         ]    floating enable
 for_window                   [class="VirtualBox Machine"]  floating enable
 
-assign                       [class="Microsoft Teams" ]    9
+assign                       [class="Microsoft Teams" ]    7
 assign                       [class="Spotify"         ]    8
 assign                       [class="Viber"           ]    3
 assign                       [class="discord"         ]    2
@@ -82,6 +83,7 @@ bindsym XF86AudioPrev        $exec playerctl previous
 bindsym XF86AudioNext        $exec playerctl next
 
 # x11 stuff and start things on boot
+$exec                        numlockx
 $exec                        xrdb ~/.Xresources
 $exec                        picom
 $exec                        /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
@@ -97,6 +99,7 @@ bindsym $mod+Home            $exec i3-keyboard-layout cycle us ua ru
 bindsym $mod+d               $exec rofi -show run
 bindsym Print                $exec flameshot gui
 bindsym $mod+b               $exec chromium
+bindsym $mod+n               $exec nautilus
 
 # redshift
 bindsym $mod+z               $exec redshift -O 4500K
@@ -179,7 +182,6 @@ set $ws7    "7"
 set $ws8    "8"
 set $ws9    "9"
 set $ws10   "10"
-set $ws11   "11"
 
 # switch to workspace
 bindsym $mod+1               workspace number $ws1
@@ -192,7 +194,6 @@ bindsym $mod+7               workspace number $ws7
 bindsym $mod+8               workspace number $ws8
 bindsym $mod+9               workspace number $ws9
 bindsym $mod+0               workspace number $ws10
-bindsym $mod+F5              workspace number $ws11
 
 # move focused container to workspace
 bindsym $mod+Shift+1         move container to workspace number $ws1
@@ -205,7 +206,6 @@ bindsym $mod+Shift+7         move container to workspace number $ws7
 bindsym $mod+Shift+8         move container to workspace number $ws8
 bindsym $mod+Shift+9         move container to workspace number $ws9
 bindsym $mod+Shift+0         move container to workspace number $ws10
-bindsym $mod+Shift+F5        move container to workspace number $ws11
 
 # reload the configuration file
 bindsym $mod+Shift+c         reload
