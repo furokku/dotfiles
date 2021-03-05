@@ -28,17 +28,17 @@ set $yellowl     #efef8f
 set $white       #fcfcfc
 set $green       #040404
 set $red         #ff0000
-set $blue        #4192f0
+set $blue1       #4192f0
+set $blue2       #038cfc
 
-# set some nice colors      border     background  text     indicator
-client.focused              $white     $white      $grayd   $white
-client.unfocused            $grayl     $grayl      $white   $grayl
-client.focused_inactive     $grayl     $grayl      $white   $grayl
-client.urgent               $red       $red        $white   $red  
+# set some nice colors        border     background  text     indicator
+client.focused                $blue1     $blue1      $grayd   $blue1
+client.unfocused              $grayl     $grayl      $white   $grayl
+client.focused_inactive       $grayl     $grayl      $white   $grayl
+client.urgent                 $red       $red        $white   $red  
 
 # window titlebar
-for_window [class=".*"] border pixel 3
-for_window [floating  ] border normal
+for_window                   [class=".*"] border pixel 3
 
 # focus for things
 ## no_focus [window_role="pop-up"]
@@ -90,7 +90,7 @@ $exec                        picom
 $exec                        /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 $exec                        xrandr --output eDP-1-1 --off
 
-#$exec                        steam -silent
+$exec                        steam -silent
 $exec                        flameshot
 $exec                        discord-canary
 $exec                        viber
@@ -100,7 +100,7 @@ $exec                        viber
 bindsym $mod+Home            $exec i3-keyboard-layout cycle us ua ru
 bindsym $mod+d               $exec rofi -show run
 bindsym Print                $exec flameshot gui
-bindsym $mod+b               $exec chromium
+bindsym $mod+b               $exec google-chrome-unstable
 bindsym $mod+n               $exec nautilus
 
 # redshift
@@ -184,6 +184,16 @@ set $ws7    "7"
 set $ws8    "8"
 set $ws9    "9"
 set $ws10   "10"
+set $ws11   "11"
+set $ws12   "12"
+set $ws13   "13"
+set $ws14   "14"
+set $ws15   "15"
+set $ws16   "16"
+set $ws17   "17"
+set $ws18   "18"
+set $ws19   "19"
+set $ws20   "20"
 
 # switch to workspace
 bindsym $mod+1               workspace number $ws1
@@ -196,6 +206,16 @@ bindsym $mod+7               workspace number $ws7
 bindsym $mod+8               workspace number $ws8
 bindsym $mod+9               workspace number $ws9
 bindsym $mod+0               workspace number $ws10
+bindsym $mod+Ctrl+1          workspace number $ws11
+bindsym $mod+Ctrl+2          workspace number $ws12
+bindsym $mod+Ctrl+3          workspace number $ws13
+bindsym $mod+Ctrl+4          workspace number $ws14
+bindsym $mod+Ctrl+5          workspace number $ws15
+bindsym $mod+Ctrl+6          workspace number $ws16
+bindsym $mod+Ctrl+7          workspace number $ws17
+bindsym $mod+Ctrl+8          workspace number $ws18
+bindsym $mod+Ctrl+9          workspace number $ws19
+bindsym $mod+Ctrl+10         workspace number $ws20
 
 # move focused container to workspace
 bindsym $mod+Shift+1         move container to workspace number $ws1
@@ -208,6 +228,17 @@ bindsym $mod+Shift+7         move container to workspace number $ws7
 bindsym $mod+Shift+8         move container to workspace number $ws8
 bindsym $mod+Shift+9         move container to workspace number $ws9
 bindsym $mod+Shift+0         move container to workspace number $ws10
+bindsym $mod+Ctrl+Shift+1    move container to workspace number $ws1
+bindsym $mod+Ctrl+Shift+2    move container to workspace number $ws2
+bindsym $mod+Ctrl+Shift+3    move container to workspace number $ws3
+bindsym $mod+Ctrl+Shift+4    move container to workspace number $ws4
+bindsym $mod+Ctrl+Shift+5    move container to workspace number $ws5
+bindsym $mod+Ctrl+Shift+6    move container to workspace number $ws6
+bindsym $mod+Ctrl+Shift+7    move container to workspace number $ws7
+bindsym $mod+Ctrl+Shift+8    move container to workspace number $ws8
+bindsym $mod+Ctrl+Shift+9    move container to workspace number $ws9
+bindsym $mod+Ctrl+Shift+0    move container to workspace number $ws10
+
 
 # reload the configuration file
 bindsym $mod+Shift+c         reload
