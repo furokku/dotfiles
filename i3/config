@@ -102,6 +102,7 @@ bindsym $mod+d               $exec rofi -show run
 bindsym Print                $exec flameshot gui
 bindsym $mod+b               $exec google-chrome-unstable
 bindsym $mod+n               $exec nautilus
+bindsym $mod+u               $exec osu
 
 # redshift
 bindsym $mod+z               $exec redshift -O 4500K
@@ -123,7 +124,7 @@ mode "app launching" {
     bindsym f                $exec fetchcord --nohost --nohardware --noshell
     bindsym c                $exec code
     bindsym v                $exec viber
-    bindsym s                $exec com.spotify.Client
+    bindsym s                $exec spotify
     bindsym g                $exec steam -silent
     bindsym Escape           mode "default"
     bindsym Return           mode "default"
@@ -287,5 +288,5 @@ bindsym $mod+r               mode "resize"
 exec_always                  ~/.config/polybar/launch.sh
 exec_always                  ~/.config/dunst/launch.sh
 exec_always                  ~/.local/bin/autotiling
-exec_always                  feh --bg-fill /home/furokku/.config/i3/wallpaper/wallhaven-dg9o7l.jpg
+exec_always                  feh --no-fehbg --bg-tile /home/furokku/.config/i3/wallpaper/3678241.png
 exec_always                  picom
