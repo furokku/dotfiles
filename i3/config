@@ -50,6 +50,8 @@ for_window                   [class="(?i)nautilus"    ]    border pixel 0
 for_window                   [class="Gedit"           ]    floating enable
 for_window                   [class="Gedit"           ]    border pixel 0
 
+for_window                   [class="Audacious"       ]    floating enable
+for_window                   [class="mpv"             ]    floating enable
 for_window                   [class="MPlayer"         ]    floating enable
 for_window                   [class="ViberPC"         ]    floating enable
 for_window                   [class="Pavucontrol"     ]    floating enable
@@ -59,7 +61,7 @@ for_window                   [class="Sxiv"            ]    floating enable
 for_window                   [class="Element"         ]    floating enable
 for_window                   [class="VirtualBox Machine"]  floating enable
 
-assign                       [class="Microsoft Teams" ]    7
+assign                       [class="Microsoft Teams" ]    8
 assign                       [class="Spotify"         ]    8
 assign                       [class="Viber"           ]    3
 assign                       [class="discord"         ]    2
@@ -90,10 +92,10 @@ $exec                        picom
 $exec                        /usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1
 $exec                        xrandr --output eDP-1-1 --off
 
-$exec                        steam -silent
+## $exec                        steam -silent
 $exec                        flameshot
 $exec                        discord-canary
-$exec                        viber
+## $exec                        viber
 
 
 # exec things
@@ -103,6 +105,7 @@ bindsym Print                $exec flameshot gui
 bindsym $mod+b               $exec google-chrome-unstable
 bindsym $mod+n               $exec nautilus
 bindsym $mod+u               $exec osu
+bindsym $mod+s               $exec bash -c "echo -e '\u200b' | xclip -sel clip"
 
 # redshift
 bindsym $mod+z               $exec redshift -O 4500K
@@ -124,8 +127,7 @@ mode "app launching" {
     bindsym f                $exec fetchcord --nohost --nohardware --noshell
     bindsym c                $exec code
     bindsym v                $exec viber
-    bindsym s                $exec spotify
-    bindsym g                $exec steam -silent
+    bindsym s                $exec steam -silent
     bindsym Escape           mode "default"
     bindsym Return           mode "default"
 }
@@ -206,7 +208,7 @@ bindsym $mod+6               workspace number $ws6
 bindsym $mod+7               workspace number $ws7
 bindsym $mod+8               workspace number $ws8
 bindsym $mod+9               workspace number $ws9
-bindsym $mod+0               workspace number $ws10
+bindsym $mod+c               workspace number $ws10
 bindsym $mod+Ctrl+1          workspace number $ws11
 bindsym $mod+Ctrl+2          workspace number $ws12
 bindsym $mod+Ctrl+3          workspace number $ws13
@@ -228,21 +230,21 @@ bindsym $mod+Shift+6         move container to workspace number $ws6
 bindsym $mod+Shift+7         move container to workspace number $ws7
 bindsym $mod+Shift+8         move container to workspace number $ws8
 bindsym $mod+Shift+9         move container to workspace number $ws9
-bindsym $mod+Shift+0         move container to workspace number $ws10
-bindsym $mod+Ctrl+Shift+1    move container to workspace number $ws1
-bindsym $mod+Ctrl+Shift+2    move container to workspace number $ws2
-bindsym $mod+Ctrl+Shift+3    move container to workspace number $ws3
-bindsym $mod+Ctrl+Shift+4    move container to workspace number $ws4
-bindsym $mod+Ctrl+Shift+5    move container to workspace number $ws5
-bindsym $mod+Ctrl+Shift+6    move container to workspace number $ws6
-bindsym $mod+Ctrl+Shift+7    move container to workspace number $ws7
-bindsym $mod+Ctrl+Shift+8    move container to workspace number $ws8
-bindsym $mod+Ctrl+Shift+9    move container to workspace number $ws9
-bindsym $mod+Ctrl+Shift+0    move container to workspace number $ws10
+bindsym $mod+Shift+c         move container to workspace number $ws10
+bindsym $mod+Ctrl+Shift+1    move container to workspace number $ws11
+bindsym $mod+Ctrl+Shift+2    move container to workspace number $ws12
+bindsym $mod+Ctrl+Shift+3    move container to workspace number $ws13
+bindsym $mod+Ctrl+Shift+4    move container to workspace number $ws14
+bindsym $mod+Ctrl+Shift+5    move container to workspace number $ws15
+bindsym $mod+Ctrl+Shift+6    move container to workspace number $ws16
+bindsym $mod+Ctrl+Shift+7    move container to workspace number $ws17
+bindsym $mod+Ctrl+Shift+8    move container to workspace number $ws18
+bindsym $mod+Ctrl+Shift+9    move container to workspace number $ws19
+bindsym $mod+Ctrl+Shift+0    move container to workspace number $ws20
 
 
 # reload the configuration file
-bindsym $mod+Shift+c         reload
+#bindsym $mod+Shift+c         reload
 bindsym $mod+Shift+r         restart
 
 # display rofi power menu
@@ -288,5 +290,5 @@ bindsym $mod+r               mode "resize"
 exec_always                  ~/.config/polybar/launch.sh
 exec_always                  ~/.config/dunst/launch.sh
 exec_always                  ~/.local/bin/autotiling
-exec_always                  feh --no-fehbg --bg-tile /home/furokku/.config/i3/wallpaper/3678241.png
+exec_always                  feh --no-fehbg --bg-fill /home/furokku/.config/i3/wallpaper/nasa.png
 exec_always                  picom
