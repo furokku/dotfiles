@@ -1,3 +1,4 @@
 configuration {
-	theme: "/home/furokku/.config/rofi/themes/onedark.rasi";
+	theme: "/home/furokku/.config/rofi/onedark.rasi";
+        font-family: "Ubuntu";
 }
