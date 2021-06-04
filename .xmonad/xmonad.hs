@@ -153,7 +153,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm,               xK_b     ), spawn "google-chrome-unstable --wm-window-animations-disabled")
 
         -- Take a screenshot
-        , ((0    ,               xK_Print), spawn "flameshot gui")
+        , ((0   ,               xK_Print ), spawn "flameshot gui")
 
         -- lock screen
         , ((modm,               xK_l     ), spawn "loginctl lock-session")
@@ -165,19 +165,40 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- start file manager
         , ((modm,               xK_n     ), spawn "nautilus")
 
+        -- close all dunst notifs
+        , ((modm,               xK_c     ), spawn "dunstctl close-all")
+
+        -- brightness controls
+        , ((0,               xF86XK_MonBrightnessUp  ), spawn "brightnessctl s +5%")
+        , ((0,               xF86XK_MonBrightnessDown), spawn "brightnessctl s 5%-")
+
+        , ((modm,               xK_F11), spawn "brightnessctl s 5%-")
+        , ((modm,               xK_F12), spawn "brightnessctl s +5%")
 
         -- playerctl controls, volume adjustment
     
-        , ((modm,               xK_F1      ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-        , ((modm,               xK_F2      ), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
-        , ((modm,               xK_F3      ), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
-        , ((modm,               xK_F4      ), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
+        , ((modm,               xK_F1    ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+        , ((modm,               xK_F2    ), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
+        , ((modm,               xK_F3    ), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
+        , ((modm,               xK_F4    ), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
 
         , ((modm,               xK_KP_Multiply), spawn "playerctl play-pause"  )
         , ((modm,               xK_KP_Divide  ), spawn "playerctl previous"    )
         , ((modm,               xK_KP_Subtract), spawn "playerctl next"        )
         , ((modm .|. shiftMask, xK_KP_Divide  ), spawn "playerctl position 10-")
         , ((modm .|. shiftMask, xK_KP_Subtract), spawn "playerctl position 10+")
+
+        , ((0,               xF86XK_AudioMute       ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+        , ((0,               xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
+        , ((0,               xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
+--(broke) ((0,               xF86XK_MicMute         ), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
+ 
+        , ((0,               xF86XK_AudioPlay), spawn "playerctl play-pause"  )
+        , ((0,               xF86XK_AudioStop), spawn "playerctl stop"        )
+        , ((0,               xF86XK_AudioPrev), spawn "playerctl previous"    )
+        , ((0,               xF86XK_AudioNext), spawn "playerctl next"        )
+        , ((0 .|. shiftMask, xF86XK_AudioPrev), spawn "playerctl position 10-")
+        , ((0 .|. shiftMask, xF86XK_AudioNext), spawn "playerctl position 10+")
     ]
     ++
     -- what the fuck xmonad
@@ -285,7 +306,8 @@ myManageHook = composeAll
     , className =? "mpv"                --> doFloat
     , className =? "Audacious"          --> doFloat
     , className =? "Pavucontrol"        --> doFloat
-    
+    , className =? "Minecraft Linux Launcher UI"-->doFloat
+
     , resource  =? "sxiv"               --> doFloat
     , resource  =? "org.gnome.Nautilus" --> doFloat
     , className =? "Gedit"              --> doFloat
@@ -308,15 +330,16 @@ myStartupHook = do
 
               spawn "/home/furokku/.config/polybar/launch.sh"
               spawn "/home/furokku/.config/dunst/launch.sh"
+              spawn "/home/furokku/.local/bin/display.sh"
 
+              spawn "pkill xss-lock; xss-lock lock.sh"
               spawn "picom --experimental-backends"
-              spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/solid-color-image.png"
+              spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/tiger.png"
 
               spawnOnce "kotatogram-desktop"
               spawnOnce "discord-canary"
 
               spawnOnce "xrandr --output eDP-1-1 --off"
-              spawnOnce "xss-lock blslock"
               spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
               spawnOnce "numlockx"
 
