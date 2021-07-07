@@ -168,6 +168,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- close all dunst notifs
         , ((modm,               xK_c     ), spawn "dunstctl close-all")
 
+        -- kill picom
+        , ((modm,               xK_s     ), spawn "pkill picom")
+        , ((modm .|. shiftMask, xK_s     ), spawn "picom"      )
+
+        -- start audacious
+        , ((modm,               xK_a     ), spawn "audacious")
+
         -- brightness controls
         , ((0,               xF86XK_MonBrightnessUp  ), spawn "brightnessctl s +5%")
         , ((0,               xF86XK_MonBrightnessDown), spawn "brightnessctl s 5%-")
@@ -336,7 +343,7 @@ myStartupHook = do
               spawn "picom --experimental-backends"
               spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/tiger.png"
 
-              spawnOnce "kotatogram-desktop"
+              spawnOnce "steam"
               spawnOnce "discord-canary"
 
               spawnOnce "xrandr --output eDP-1-1 --off"

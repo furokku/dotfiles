@@ -4,7 +4,7 @@ let &packpath = &runtimepath
 
 " vundle
 set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#begin()
+call vundle#rc("~/.config/nvim/bundle")
 
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
@@ -25,6 +25,7 @@ let g:syntastic_check_on_w = 1
 let g:syntastic_check_on_wq = 0
 
 nnoremap <C-f> :NERDTreeToggle<CR>
+nnoremap <C-g> :lopen<CR>
 
 set shiftwidth=4
 set softtabstop=4

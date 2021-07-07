@@ -1,4 +1,4 @@
-background_opacity: 0.75
+background_opacity: 0.91
 
 env:
   TERM: xterm-256color
@@ -17,7 +17,7 @@ cursor:
 
 font:
   normal:
-    family: UbuntuMono
+    family: Ubuntu Mono
     style: Regular
   bold:
     family: Ubuntu Mono
@@ -51,7 +51,7 @@ colors:
     green:   '0x1cdc9a'
     yellow:  '0xfdbc4b'
     blue:    '0x3daee9'
-    magenta: '0x8e44ad'
+    magenta: '0xffc0cb'
     cyan:    '0x16a085'
     white:   '0xffffff'
 
