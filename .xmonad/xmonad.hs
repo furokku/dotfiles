@@ -1,13 +1,14 @@
 import XMonad
 import Data.Monoid
+import Data.List
 import System.Exit
 import Graphics.X11.ExtraTypes.XF86
 
 import XMonad.Actions.Navigation2D
 import XMonad.Actions.UpdatePointer
 import XMonad.Actions.CopyWindow
+import XMonad.Actions.TagWindows
 
-import XMonad.Layout.Spacing
 import XMonad.Layout.Gaps
 import XMonad.Layout.BinarySpacePartition as BSP
 import XMonad.Layout.ThreeColumns
@@ -23,6 +24,7 @@ import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
 import XMonad.Hooks.SetWMName
+import XMonad.Hooks.XPropManage
 
 import XMonad.Util.Cursor
 import XMonad.Util.Run
@@ -150,13 +152,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
 
         -- Start Chrome
-        , ((modm,               xK_b     ), spawn "google-chrome-unstable --wm-window-animations-disabled")
+        , ((modm,               xK_b     ), spawn "chromium --wm-window-animations-disabled")
 
         -- Take a screenshot
         , ((0   ,               xK_Print ), spawn "flameshot gui")
 
         -- lock screen
         , ((modm,               xK_l     ), spawn "loginctl lock-session")
+        , ((mod4Mask,           xK_l     ), spawn "loginctl lock-session")
     
         -- redshift
         , ((modm,               xK_z     ), spawn "redshift -O 4500K")
@@ -314,6 +317,7 @@ myManageHook = composeAll
     , className =? "Audacious"          --> doFloat
     , className =? "Pavucontrol"        --> doFloat
     , className =? "Minecraft Linux Launcher UI"-->doFloat
+    , resource  =? "xmessage"           --> doFloat
 
     , resource  =? "sxiv"               --> doFloat
     , resource  =? "org.gnome.Nautilus" --> doFloat
@@ -323,6 +327,7 @@ myManageHook = composeAll
     , resource  =? "desktop_window"     --> doIgnore
     , resource  =? "kdesktop"           --> doIgnore
     , isFullscreen                      --> (doF W.focusDown <+> doFullFloat)]
+
 
 ------------------------------------------------------------------------
 -- myEventHook = mconcat [ fullscreenEventHook ]
@@ -340,11 +345,12 @@ myStartupHook = do
               spawn "/home/furokku/.local/bin/display.sh"
 
               spawn "pkill xss-lock; xss-lock lock.sh"
-              spawn "picom --experimental-backends"
+              spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence"
               spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/tiger.png"
 
               spawnOnce "steam"
               spawnOnce "discord-canary"
+              spawnOnce "flameshot"
 
               spawnOnce "xrandr --output eDP-1-1 --off"
               spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
