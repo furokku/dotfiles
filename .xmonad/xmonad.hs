@@ -173,7 +173,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
         -- kill picom
         , ((modm,               xK_s     ), spawn "pkill picom")
-        , ((modm .|. shiftMask, xK_s     ), spawn "picom"      )
+        , ((modm .|. shiftMask, xK_s     ), spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence")
 
         -- start audacious
         , ((modm,               xK_a     ), spawn "audacious")
@@ -301,7 +301,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --
 
 
-myLayout = avoidStruts (tiled ||| noBorders Full)
+myLayout = avoidStruts (tiled ||| noBorders Full ||| Mirror tiled)
   where
      tiled   = spacing 6 $ Tall nmaster delta ratio
      nmaster = 1
@@ -346,7 +346,7 @@ myStartupHook = do
 
               spawn "pkill xss-lock; xss-lock lock.sh"
               spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence"
-              spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/tiger.png"
+              spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/0rmaq8z5voc61.jpg"
 
               spawnOnce "steam"
               spawnOnce "discord-canary"
