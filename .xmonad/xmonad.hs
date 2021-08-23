@@ -73,7 +73,8 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  = "#9f9f9f"
-myFocusedBorderColor = "#ffacbc"
+myFocusedBorderColor = "#fbec3b"
+--myFocusedBorderColor = "#ffacbc"
 
 ------------------------------------------------------------------------
 -- Key bindings. Add, modify or remove key bindings here.
@@ -346,7 +347,7 @@ myStartupHook = do
 
               spawn "pkill xss-lock; xss-lock lock.sh"
               spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence"
-              spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/0rmaq8z5voc61.jpg"
+              spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/nasa.png"
 
               spawnOnce "steam"
               spawnOnce "discord-canary"
