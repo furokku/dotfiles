@@ -37,7 +37,7 @@ import qualified Data.Map        as M
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
-myTerminal      = "alacritty"
+myTerminal      = "WINIT_X11_SCALE_FACTOR=1 alacritty"
 
 
 -- Whether focus follows the mouse pointer.
@@ -72,7 +72,7 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#9f9f9f"
+myNormalBorderColor  = "#bfbfbf"
 myFocusedBorderColor = "#fbec3b"
 --myFocusedBorderColor = "#ffacbc"
 
@@ -81,12 +81,10 @@ myFocusedBorderColor = "#fbec3b"
 --
 myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
-        -- launch a terminal
---  [ ((modm .|. shiftMask, xK_Return), spawn $ XMonad.terminal conf)
-
-        -- launch an actual terminal
     [
-          ((modm,               xK_Return), spawn "bash -c 'WINIT_X11_SCALE_FACTOR=1 alacritty'")
+        -- launch a terminal
+    
+          ((modm,               xK_Return), spawn $ XMonad.terminal conf)
 
         -- launch rofi 
         , ((modm,               xK_d     ), spawn "rofi -show run")
@@ -150,7 +148,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- , ((modm .|. shiftMask, xK_e     ), io (exitWith ExitSuccess))
 
         -- Restart xmonad
-        , ((modm .|. shiftMask, xK_r     ), spawn "xmonad --recompile; xmonad --restart")
+        , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
         -- Start Chrome
         , ((modm,               xK_b     ), spawn "chromium --wm-window-animations-disabled")
@@ -226,7 +224,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     -- mod-shift-{w,e,r}, Move client to screen 1, 2, or 3
     --
     [((m .|. modm, key), screenWorkspace sc >>= flip whenJust (windows . f))
-        | (key, sc) <- zip [xK_w, xK_e, xK_F9] [0..]
+        | (key, sc) <- zip [xK_w, xK_e, xK_r] [0..]
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
     [
@@ -315,14 +313,16 @@ myLayout = avoidStruts (tiled ||| noBorders Full ||| Mirror tiled)
 myManageHook = composeAll
     [ className =? "MPlayer"            --> doFloat
     , className =? "mpv"                --> doFloat
-    , className =? "Audacious"          --> doFloat
+    , className =? "Asunder"            --> doFloat
     , className =? "Pavucontrol"        --> doFloat
     , className =? "Minecraft Linux Launcher UI"-->doFloat
     , resource  =? "xmessage"           --> doFloat
 
     , resource  =? "sxiv"               --> doFloat
     , resource  =? "org.gnome.Nautilus" --> doFloat
+    , className =? "Evince"             --> doFloat
     , className =? "Gedit"              --> doFloat
+    , resource  =? "gnome-disks"        --> doFloat
 
 --  , resource  =? "polybar"            --> doIgnore
     , resource  =? "desktop_window"     --> doIgnore
@@ -331,7 +331,7 @@ myManageHook = composeAll
 
 
 ------------------------------------------------------------------------
--- myEventHook = mconcat [ fullscreenEventHook ]
+myEventHook = mconcat [ fullscreenEventHook ]
 ------------------------------------------------------------------------
 
 myLogHook = return ()
@@ -343,9 +343,8 @@ myStartupHook = do
 
               spawn "/home/furokku/.config/polybar/launch.sh"
               spawn "/home/furokku/.config/dunst/launch.sh"
-              spawn "/home/furokku/.local/bin/display.sh"
 
-              spawn "pkill xss-lock; xss-lock lock.sh"
+              spawn "pkill xss-lock; xss-lock ~/.local/bin/lock.sh"
               spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence"
               spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/nasa.png"
 
@@ -353,9 +352,9 @@ myStartupHook = do
               spawnOnce "discord-canary"
               spawnOnce "flameshot"
 
-              spawnOnce "xrandr --output eDP-1-1 --off"
               spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
               spawnOnce "numlockx"
+              spawnOnce "xrandr --output HDMI-A-0 --right-of DisplayPort-1 --output DisplayPort-1 --primary"
 
 main = xmonad $ docks . ewmh $ defaults
 
