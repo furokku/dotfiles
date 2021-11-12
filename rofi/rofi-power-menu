@@ -13,7 +13,7 @@ set -e
 set -u
 
 # All supported choices
-all=(shutdown reboot suspend logout lockscreen)
+all=(shutdown reboot suspend hibernate logout lockscreen)
 
 # By default, show all (i.e., just copy the array)
 show=("${all[@]}")
@@ -23,6 +23,7 @@ texts[lockscreen]="lock screen"
 texts[switchuser]="switch user"
 texts[logout]="log out"
 texts[suspend]="suspend"
+texts[hibernate]="hibernate"
 texts[reboot]="reboot"
 texts[shutdown]="shut down"
 
@@ -31,17 +32,19 @@ icons[lockscreen]="\uf023"
 icons[switchuser]="\uf518"
 icons[logout]="\uf842"
 icons[suspend]="\uf9b1"
+icons[hibernate]="\uf7c9"
 icons[reboot]="\ufc07"
 icons[shutdown]="\uf011"
 icons[cancel]="\u00d7"
 
 declare -A actions
-actions[lockscreen]="loginctl lock-session $XDG_SESSION_ID"
+actions[lockscreen]="loginctl lock-session ${XDG_SESSION_ID-}"
 #actions[switchuser]="???"
-actions[logout]="loginctl terminate-session $XDG_SESSION_ID"
+actions[logout]="loginctl terminate-session ${XDG_SESSION_ID-}"
 actions[suspend]="systemctl suspend"
-actions[reboot]="reboot"
-actions[shutdown]="poweroff"
+actions[hibernate]="systemctl hibernate"
+actions[reboot]="systemctl reboot"
+actions[shutdown]="systemctl poweroff"
 
 # By default, ask for confirmation for actions that are irreversible
 confirmations=(reboot shutdown logout)
@@ -87,11 +90,11 @@ while true; do
             echo "  --dry-run          Don't perform the selected action but print it to stderr."
             echo "  --choices CHOICES  Show only the selected choices in the given order. Use / "
             echo "                     as the separator. Available choices are lockscreen, logout,"
-            echo "                     suspend, reboot and shutdown. By default, all"
+            echo "                     suspend, hibernate, reboot and shutdown. By default, all"
             echo "                     available choices are shown."
             echo "  --confirm CHOICES  Require confirmation for the gives choices only. Use / as"
             echo "                     the separator. Available choices are lockscreen, logout,"
-            echo "                     suspend, reboot and shutdown. By default, only"
+            echo "                     suspend, hibernate, reboot and shutdown. By default, only"
             echo "                     irreversible actions logout, reboot and shutdown require"
             echo "                     confirmation."
             echo "  --choose CHOICE    Preselect the given choice and only ask for a confirmation"
@@ -99,9 +102,9 @@ while true; do
             echo "                     recommended to combine this option with --confirm=CHOICE"
             echo "                     if the choice wouldn't require confirmation by default."
             echo "                     Available choices are lockscreen, logout, suspend,"
-            echo "                     reboot and shutdown."
+            echo "                     hibernate, reboot and shutdown."
             echo "  --[no-]symbols     Show Unicode symbols or not. Requires a font with support"
-            echo "                     for the symbols. Use, for instance, fonts from the"
+           echo "                     for the symbols. Use, for instance, fonts from the"
             echo "                     Nerdfonts collection. By default, they are shown"
             echo "  -h,--help          Show this help text."
             exit 0
@@ -194,7 +197,7 @@ echo -e "\0markup-rows\x1ftrue"
 
 if [ -z "${selection+x}" ]
 then
-    echo -e "\0prompt\x1f"
+    echo -e "\0prompt\x1fPower menu"
     for entry in "${show[@]}"
     do
         echo -e "${messages[$entry]}\0icon\x1f${icons[$entry]}"
@@ -240,4 +243,4 @@ else
     # The selection didn't match anything, so raise an error
     echo "Invalid selection: $selection" >&2
     exit 1
-fi
+fi 

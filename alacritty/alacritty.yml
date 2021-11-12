@@ -32,7 +32,7 @@ font:
 
 colors:
   primary:
-    background: '0x2a2d2f'
+    background: '0x272934'
     foreground: '0xfcfcfc'
 
   normal:

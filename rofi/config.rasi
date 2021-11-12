@@ -1,3 +1,2 @@
-configuration {
-    theme: "dracula.rasi";
-}
+//@theme "/usr/share/rofi/themes/android_notification.rasi"
+@theme "/usr/share/rofi/themes/android_notification.rasi"

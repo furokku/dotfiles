@@ -1,33 +1,18 @@
 import XMonad
 import Data.Monoid
-import Data.List
 import System.Exit
 import Graphics.X11.ExtraTypes.XF86
 
-import XMonad.Actions.Navigation2D
-import XMonad.Actions.UpdatePointer
-import XMonad.Actions.CopyWindow
 import XMonad.Actions.TagWindows
 
 import XMonad.Layout.Gaps
-import XMonad.Layout.BinarySpacePartition as BSP
-import XMonad.Layout.ThreeColumns
 import XMonad.Layout.Spacing
-import XMonad.Layout.Renamed
-import XMonad.Layout.Tabbed
-import XMonad.Layout.SubLayouts
-import XMonad.Layout.WindowNavigation
-import XMonad.Layout.ZoomRow
 import XMonad.Layout.NoBorders
 
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
 import XMonad.Hooks.ManageHelpers
-import XMonad.Hooks.SetWMName
-import XMonad.Hooks.XPropManage
 
-import XMonad.Util.Cursor
-import XMonad.Util.Run
 import XMonad.Util.SpawnOnce (spawnOnce)
 import XMonad.Util.EZConfig
 
@@ -83,7 +68,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
     [
         -- launch a terminal
-    
           ((modm,               xK_Return), spawn $ XMonad.terminal conf)
 
         -- launch rofi 
@@ -102,22 +86,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
 
         -- Resize viewed windows to the correct size
-        , ((modm,               xK_n     ), refresh)
-
-        -- Move focus to the next window
-        , ((modm,               xK_semicolon), windows W.focusDown)
-
-        -- Move focus to the previous window
-        -- , ((modm,               xK_Right ), windows W.focusUp  )
-
-        -- Move focus to the master window
-        -- , ((modm,               xK_m     ), windows W.focusMaster  )
-
-        -- Swap the focused window with the next window
-        -- , ((modm .|. shiftMask, xK_l     ), windows W.swapDown  )
-
-        -- Swap the focused window with the previous window
-        -- , ((modm .|. shiftMask, xK_k     ), windows W.swapUp    )
+        -- i don[t even know what this does
+        -- , ((modm,               xK_n     ), refresh)
 
         -- Shrink the master area
         , ((modm .|. shiftMask, xK_j     ), sendMessage Shrink)
@@ -148,7 +118,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- , ((modm .|. shiftMask, xK_e     ), io (exitWith ExitSuccess))
 
         -- Restart xmonad
-        , ((modm .|. controlMask, xK_q     ), spawn "xmonad --recompile; xmonad --restart")
+        , ((modm .|. controlMask, xK_q   ), spawn "xmonad --recompile; xmonad --restart")
 
         -- Start Chrome
         , ((modm,               xK_b     ), spawn "chromium --wm-window-animations-disabled")
@@ -158,7 +128,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
         -- lock screen
         , ((modm,               xK_l     ), spawn "loginctl lock-session")
-        , ((mod4Mask,           xK_l     ), spawn "loginctl lock-session")
     
         -- redshift
         , ((modm,               xK_z     ), spawn "redshift -O 4500K")
@@ -166,7 +135,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     
         -- start file manager
         , ((modm,               xK_n     ), spawn "nautilus")
-
+  
         -- close all dunst notifs
         , ((modm,               xK_c     ), spawn "dunstctl close-all")
 
@@ -176,13 +145,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
         -- start audacious
         , ((modm,               xK_a     ), spawn "audacious")
-
-        -- brightness controls
-        , ((0,               xF86XK_MonBrightnessUp  ), spawn "brightnessctl s +5%")
-        , ((0,               xF86XK_MonBrightnessDown), spawn "brightnessctl s 5%-")
-
-        , ((modm,               xK_F11), spawn "brightnessctl s 5%-")
-        , ((modm,               xK_F12), spawn "brightnessctl s +5%")
 
         -- playerctl controls, volume adjustment
     
@@ -197,21 +159,19 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm .|. shiftMask, xK_KP_Divide  ), spawn "playerctl position 10-")
         , ((modm .|. shiftMask, xK_KP_Subtract), spawn "playerctl position 10+")
 
-        , ((0,               xF86XK_AudioMute       ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-        , ((0,               xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
-        , ((0,               xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
+--      , ((0,               xF86XK_AudioMute       ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+--      , ((0,               xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
+--      , ((0,               xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
 --(broke) ((0,               xF86XK_MicMute         ), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
  
-        , ((0,               xF86XK_AudioPlay), spawn "playerctl play-pause"  )
-        , ((0,               xF86XK_AudioStop), spawn "playerctl stop"        )
-        , ((0,               xF86XK_AudioPrev), spawn "playerctl previous"    )
-        , ((0,               xF86XK_AudioNext), spawn "playerctl next"        )
-        , ((0 .|. shiftMask, xF86XK_AudioPrev), spawn "playerctl position 10-")
-        , ((0 .|. shiftMask, xF86XK_AudioNext), spawn "playerctl position 10+")
+--      , ((0,               xF86XK_AudioPlay), spawn "playerctl play-pause"  )
+--      , ((0,               xF86XK_AudioStop), spawn "playerctl stop"        )
+--      , ((0,               xF86XK_AudioPrev), spawn "playerctl previous"    )
+--      , ((0,               xF86XK_AudioNext), spawn "playerctl next"        )
+--      , ((0 .|. shiftMask, xF86XK_AudioPrev), spawn "playerctl position 10-")
+--      , ((0 .|. shiftMask, xF86XK_AudioNext), spawn "playerctl position 10+")
     ]
     ++
-    -- what the fuck xmonad
-    
     -- mod-[1..9], Switch to workspace N
     -- mod-shift-[1..9], Move client to workspace N
     --
@@ -229,19 +189,16 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
     [
 
-          ((modm,               xK_Right ), windowGo   R False)
-        , ((modm,               xK_Left  ), windowGo   L False)
-        , ((modm,               xK_Up    ), windowGo   U False)
-        , ((modm,               xK_Down  ), windowGo   D False)
+--        ((modm,               xK_Right ), windows W.focusRight)
+--      , ((modm,               xK_Left  ), windows W.focusLeft )
+          ((modm,               xK_Up    ), windows W.focusUp   )
+        , ((modm,               xK_Down  ), windows W.focusDown )
 
        -- Swap adjacent windows
-        , ((modm .|. shiftMask, xK_Right ), windowSwap R False)
-        , ((modm .|. shiftMask, xK_Left  ), windowSwap L False)
-        , ((modm .|. shiftMask, xK_Up    ), windowSwap U False)
-        , ((modm .|. shiftMask, xK_Down  ), windowSwap D False)
-
-        , ((modm                , xK_p   ), screenSwap R False)
-        , ((modm                , xK_o   ), screenSwap L False)
+--      , ((modm .|. shiftMask, xK_Right ), windows W.swapRight)
+--      , ((modm .|. shiftMask, xK_Left  ), windows W.swapLeft )
+        , ((modm .|. shiftMask, xK_Up    ), windows W.swapUp   )
+        , ((modm .|. shiftMask, xK_Down  ), windows W.swapDown )
     ]
 --  ++
 --  [
@@ -300,7 +257,7 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 --
 
 
-myLayout = avoidStruts (tiled ||| noBorders Full ||| Mirror tiled)
+myLayout = avoidStruts (tiled ||| noBorders Full)
   where
      tiled   = spacing 6 $ Tall nmaster delta ratio
      nmaster = 1
@@ -317,6 +274,7 @@ myManageHook = composeAll
     , className =? "Pavucontrol"        --> doFloat
     , className =? "Minecraft Linux Launcher UI"-->doFloat
     , resource  =? "xmessage"           --> doFloat
+    , className =? "Tk"                 --> doFloat
 
     , resource  =? "sxiv"               --> doFloat
     , resource  =? "org.gnome.Nautilus" --> doFloat
@@ -354,7 +312,7 @@ myStartupHook = do
 
               spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
               spawnOnce "numlockx"
-              spawnOnce "xrandr --output HDMI-A-0 --right-of DisplayPort-1 --output DisplayPort-1 --primary"
+              spawnOnce "xrandr --output HDMI-A-0 --right-of DisplayPort-1 --output DisplayPort-1 --primary --output DVI-D-0 --left-of DisplayPort-1"
 
 main = xmonad $ docks . ewmh $ defaults
 
