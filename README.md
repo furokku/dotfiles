@@ -1,5 +1,5 @@
 # dots
-these are the dotfiles that i use on my system.<br>included are: xmonad, rofi, neofetch, i3-gaps, i3status, dunst, alacritty, picom, polybar config files
+these are the dotfiles that i use on my system.<br>included are: xmonad, rofi, neofetch, i3-gaps, i3status, dunst, alacritty, picom, polybar, neovim config files
 
 ## dunst
 dunst got a bunch of config options deprecated and whatnot so half the config doesn't work since i haven't been able to fully fix it yet
