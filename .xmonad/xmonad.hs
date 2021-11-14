@@ -87,13 +87,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
         -- Resize viewed windows to the correct size
         -- i don[t even know what this does
-        -- , ((modm,               xK_n     ), refresh)
+        , ((modm,               xK_g     ), refresh)
 
         -- Shrink the master area
-        , ((modm .|. shiftMask, xK_j     ), sendMessage Shrink)
+        , ((modm .|. shiftMask, xK_h     ), sendMessage Shrink)
 
         -- Expand the master area
-        , ((modm .|. shiftMask, xK_h     ), sendMessage Expand)
+        , ((modm .|. shiftMask, xK_l     ), sendMessage Expand)
 
         -- Push window back into tiling
         , ((modm,               xK_t     ), withFocused $ windows . W.sink)
@@ -127,7 +127,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((0   ,               xK_Print ), spawn "flameshot gui")
 
         -- lock screen
-        , ((modm,               xK_l     ), spawn "loginctl lock-session")
+        , ((modm,               xK_y     ), spawn "loginctl lock-session")
     
         -- redshift
         , ((modm,               xK_z     ), spawn "redshift -O 4500K")
@@ -143,9 +143,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm,               xK_s     ), spawn "pkill picom")
         , ((modm .|. shiftMask, xK_s     ), spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence")
 
-        -- start audacious
-        , ((modm,               xK_a     ), spawn "audacious")
-
         -- playerctl controls, volume adjustment
     
         , ((modm,               xK_F1    ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
@@ -153,11 +150,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm,               xK_F3    ), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
         , ((modm,               xK_F4    ), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
 
-        , ((modm,               xK_KP_Multiply), spawn "playerctl play-pause"  )
-        , ((modm,               xK_KP_Divide  ), spawn "playerctl previous"    )
-        , ((modm,               xK_KP_Subtract), spawn "playerctl next"        )
-        , ((modm .|. shiftMask, xK_KP_Divide  ), spawn "playerctl position 10-")
-        , ((modm .|. shiftMask, xK_KP_Subtract), spawn "playerctl position 10+")
+        , ((modm,               xK_KP_Multiply), spawn "mpc toggle")
+        , ((modm,               xK_KP_Divide  ), spawn "mpc prev")
+        , ((modm,               xK_KP_Subtract), spawn "mpc next")
+        , ((modm .|. shiftMask, xK_KP_Divide  ), spawn "mpc seek -00:00:10")
+        , ((modm .|. shiftMask, xK_KP_Subtract), spawn "mpc seek +00:00:10")
+        , ((modm .|. shiftMask, xK_F2         ), spawn "mpc volume -5")
+        , ((modm .|. shiftMask, xK_F3         ), spawn "mpc volume +5")
 
 --      , ((0,               xF86XK_AudioMute       ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
 --      , ((0,               xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
@@ -191,14 +190,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
 --        ((modm,               xK_Right ), windows W.focusRight)
 --      , ((modm,               xK_Left  ), windows W.focusLeft )
-          ((modm,               xK_Up    ), windows W.focusUp   )
-        , ((modm,               xK_Down  ), windows W.focusDown )
+          ((modm,               xK_k     ), windows W.focusUp   )
+        , ((modm,               xK_j     ), windows W.focusDown )
 
        -- Swap adjacent windows
 --      , ((modm .|. shiftMask, xK_Right ), windows W.swapRight)
 --      , ((modm .|. shiftMask, xK_Left  ), windows W.swapLeft )
-        , ((modm .|. shiftMask, xK_Up    ), windows W.swapUp   )
-        , ((modm .|. shiftMask, xK_Down  ), windows W.swapDown )
+        , ((modm,               xK_h     ), windows W.swapUp   )
+        , ((modm,               xK_l     ), windows W.swapDown )
     ]
 --  ++
 --  [
@@ -304,7 +303,7 @@ myStartupHook = do
 
               spawn "pkill xss-lock; xss-lock ~/.local/bin/lock.sh"
               spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence"
-              spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/nasa.png"
+              spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/94e5ituyretb45.png"
 
               spawnOnce "steam"
               spawnOnce "discord-canary"
