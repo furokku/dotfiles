@@ -57,8 +57,11 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
-myNormalBorderColor  = "#bfbfbf"
-myFocusedBorderColor = "#fbec3b"
+myNormalBorderColor  = "#928374"
+myFocusedBorderColor = "#fabd2f"
+--myFocusedBorderColor = "#8a2be2"
+--myFocusedBorderColor = "#d3869b"
+--myFocusedBorderColor = "#fbec3b"
 --myFocusedBorderColor = "#ffacbc"
 
 ------------------------------------------------------------------------
@@ -187,27 +190,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
     [
-
---        ((modm,               xK_Right ), windows W.focusRight)
---      , ((modm,               xK_Left  ), windows W.focusLeft )
           ((modm,               xK_k     ), windows W.focusUp   )
         , ((modm,               xK_j     ), windows W.focusDown )
-
        -- Swap adjacent windows
---      , ((modm .|. shiftMask, xK_Right ), windows W.swapRight)
---      , ((modm .|. shiftMask, xK_Left  ), windows W.swapLeft )
         , ((modm,               xK_h     ), windows W.swapUp   )
         , ((modm,               xK_l     ), windows W.swapDown )
     ]
 --  ++
 --  [
---        ((modm,                 xK_u   ), windows copyToAll )
---      , ((modm .|. controlMask, xK_u   ), killAllOtherCopies)
---  ]
---  ++
---
---  [
---  
 --  -- Tab current focused window with the window to the left
 --      ((modm    .|. controlMask, xK_Left), sendMessage $ pullGroup L)
 --  -- Tab current focused window with the window to the right
@@ -267,21 +257,13 @@ myLayout = avoidStruts (tiled ||| noBorders Full)
 -- Window rules
 
 myManageHook = composeAll
-    [ className =? "MPlayer"            --> doFloat
-    , className =? "mpv"                --> doFloat
-    , className =? "Asunder"            --> doFloat
+    [ className =? "mpv"                --> doFloat
     , className =? "Pavucontrol"        --> doFloat
-    , className =? "Minecraft Linux Launcher UI"-->doFloat
-    , resource  =? "xmessage"           --> doFloat
-    , className =? "Tk"                 --> doFloat
 
     , resource  =? "sxiv"               --> doFloat
     , resource  =? "org.gnome.Nautilus" --> doFloat
-    , className =? "Evince"             --> doFloat
     , className =? "Gedit"              --> doFloat
-    , resource  =? "gnome-disks"        --> doFloat
 
---  , resource  =? "polybar"            --> doIgnore
     , resource  =? "desktop_window"     --> doIgnore
     , resource  =? "kdesktop"           --> doIgnore
     , isFullscreen                      --> (doF W.focusDown <+> doFullFloat)]
@@ -302,10 +284,10 @@ myStartupHook = do
               spawn "/home/furokku/.config/dunst/launch.sh"
 
               spawn "pkill xss-lock; xss-lock ~/.local/bin/lock.sh"
-              spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence"
-              spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/94e5ituyretb45.png"
+--            spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence"
+              spawn "feh --no-fehbg --bg-tile /home/furokku/.local/wallpaper/tiled8.png"
 
-              spawnOnce "steam"
+              spawnOnce "steam -silent"
               spawnOnce "discord-canary"
               spawnOnce "flameshot"
 

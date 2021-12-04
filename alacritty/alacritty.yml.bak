@@ -1,0 +1,61 @@
+background_opacity: 0.91
+
+env:
+  TERM: xterm-256color
+
+window:
+  padding:
+    x: 3
+    y: 3
+  title: Alacritty
+
+cursor:
+  style:
+    shape: Block
+    blinking: On
+    blink_rate: 3
+
+font:
+  normal:
+    family: Ubuntu Mono
+    style: Regular
+  bold:
+    family: Ubuntu Mono
+    style: Bold
+  italic:
+    family: Ubuntu Mono
+    style: Italic
+  bold_italic:
+    family: Ubuntu Mono
+    style: Bold Italic
+  size: 12
+
+colors:
+  primary:
+    background: '0x272934'
+    foreground: '0xfcfcfc'
+
+  normal:
+    black:   '0x232627'
+    red:     '0xed1515'
+    green:   '0x11d116'
+    yellow:  '0xf67400'
+    blue:    '0x1d99f3'
+    magenta: '0x9b59b6'
+    cyan:    '0x1abc9c'
+    white:   '0xfcfcfc'
+
+  bright:
+    black:   '0x8f8c8d'
+    red:     '0xc0392b'
+    green:   '0x1cdc9a'
+    yellow:  '0xfdbc4b'
+    blue:    '0x3daee9'
+    magenta: '0xffc0cb'
+    cyan:    '0x16a085'
+    white:   '0xffffff'
+
+shell:
+  program: /usr/bin/zsh
+  args:
+    - --login
