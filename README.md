@@ -3,7 +3,7 @@ these are the dotfiles that i use on my system.<br>included are: xmonad, rofi, n
 <br>pretty much just a basic gruvbox + xmonad config
 
 ## dunst
-dunst got a bunch of config options deprecated and whatnot so half the config doesn't work since i haven't been able to fully fix it yet
+~~dunst got a bunch of config options deprecated and whatnot so half the config doesn't work since i haven't been able to fully fix it yet~~ this has been fixed
 
 ## picom
 picom got cut out from this config because of the issues it caused with window borders, however the file is still here if you want to use it
