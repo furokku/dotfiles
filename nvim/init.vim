@@ -43,7 +43,6 @@ if (empty($TMUX))
 endif
 
 nnoremap <C-f> :NERDTreeToggle<CR>
-nnoremap <C-g> :lopen<CR>
 
 set shiftwidth=4
 set softtabstop=4
