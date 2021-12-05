@@ -3,8 +3,6 @@ import Data.Monoid
 import System.Exit
 import Graphics.X11.ExtraTypes.XF86
 
-import XMonad.Actions.TagWindows
-
 import XMonad.Layout.Gaps
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
@@ -146,7 +144,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm,               xK_s     ), spawn "pkill picom")
         , ((modm .|. shiftMask, xK_s     ), spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence")
 
-        -- playerctl controls, volume adjustment
+        -- mpc controls, volume adjustment
     
         , ((modm,               xK_F1    ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
         , ((modm,               xK_F2    ), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
@@ -160,18 +158,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm .|. shiftMask, xK_KP_Subtract), spawn "mpc seek +00:00:10")
         , ((modm .|. shiftMask, xK_F2         ), spawn "mpc volume -5")
         , ((modm .|. shiftMask, xK_F3         ), spawn "mpc volume +5")
-
---      , ((0,               xF86XK_AudioMute       ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
---      , ((0,               xF86XK_AudioLowerVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
---      , ((0,               xF86XK_AudioRaiseVolume), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
---(broke) ((0,               xF86XK_MicMute         ), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
- 
---      , ((0,               xF86XK_AudioPlay), spawn "playerctl play-pause"  )
---      , ((0,               xF86XK_AudioStop), spawn "playerctl stop"        )
---      , ((0,               xF86XK_AudioPrev), spawn "playerctl previous"    )
---      , ((0,               xF86XK_AudioNext), spawn "playerctl next"        )
---      , ((0 .|. shiftMask, xF86XK_AudioPrev), spawn "playerctl position 10-")
---      , ((0 .|. shiftMask, xF86XK_AudioNext), spawn "playerctl position 10+")
     ]
     ++
     -- mod-[1..9], Switch to workspace N
@@ -190,29 +176,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , (f, m) <- [(W.view, 0), (W.shift, shiftMask)]]
     ++
     [
+       -- focus adjacent windows
           ((modm,               xK_k     ), windows W.focusUp   )
         , ((modm,               xK_j     ), windows W.focusDown )
        -- Swap adjacent windows
         , ((modm,               xK_h     ), windows W.swapUp   )
         , ((modm,               xK_l     ), windows W.swapDown )
     ]
---  ++
---  [
---  -- Tab current focused window with the window to the left
---      ((modm    .|. controlMask, xK_Left), sendMessage $ pullGroup L)
---  -- Tab current focused window with the window to the right
---    , ((modm    .|. controlMask, xK_Right), sendMessage $ pullGroup R)
---  -- Tab current focused window with the window above
---    , ((modm    .|. controlMask, xK_Up), sendMessage $ pullGroup U)
---  -- Tab current focused window with the window below
---    , ((modm    .|. controlMask, xK_Down), sendMessage $ pullGroup D)
---
---  -- Tab all windows in the current workspace with current window as the focus
---    , ((modm    .|. controlMask, xK_m), withFocused (sendMessage . MergeAll))
---  -- Group the current tabbed windows
---    , ((modm    .|. controlMask, xK_u), withFocused (sendMessage . UnMerge))
---
---  ]
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
