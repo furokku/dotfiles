@@ -17,18 +17,18 @@ cursor:
 
 font:
   normal:
-    family: UbuntuMono Nerd Font
+    family: Inconsolata
     style: Regular
   bold:
-    family: UbuntuMono Nerd Font
+    family: Inconsolata
     style: Bold
   italic:
-    family: UbuntuMono Nerd Font
+    family: Inconsolata
     style: Italic
   bold_italic:
-    family: UbuntuMono Nerd Font
+    family: Inconsolata
     style: Bold Italic
-  size: 12
+  size: 11
 
 colors:
   primary:
