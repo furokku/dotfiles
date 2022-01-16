@@ -2,6 +2,9 @@
 these are the dotfiles that i use on my system.<br>included are: xmonad, rofi, neofetch, i3-gaps, i3status, dunst, alacritty, picom, polybar, neovim config files
 <br>pretty much just a basic gruvbox + xmonad config
 
+### xmonad
+make sure you use xmonad 0.17, otherwise the config will not build because of the ewmhFullscreen option on line 266. remove that part in order to use on older versions (like 0.15)
+
 ## dunst
 ~~dunst got a bunch of config options deprecated and whatnot so half the config doesn't work since i haven't been able to fully fix it yet~~
 this has been fixed

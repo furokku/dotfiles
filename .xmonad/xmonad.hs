@@ -3,6 +3,8 @@ import Data.Monoid
 import System.Exit
 import Graphics.X11.ExtraTypes.XF86
 
+import XMonad.Operations
+
 import XMonad.Layout.Gaps
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
@@ -122,7 +124,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm .|. controlMask, xK_q   ), spawn "xmonad --recompile; xmonad --restart")
 
         -- Start Chrome
-        , ((modm,               xK_b     ), spawn "chromium --wm-window-animations-disabled")
+        , ((modm,               xK_b     ), spawn "chromium --wm-window-animations-disabled --ssl-version-min=tls1.2")
 
         -- Take a screenshot
         , ((0   ,               xK_Print ), spawn "flameshot gui")
@@ -135,14 +137,14 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm,               xK_x     ), spawn "redshift -x")
     
         -- start file manager
-        , ((modm,               xK_n     ), spawn "nautilus")
+        , ((modm,               xK_n     ), spawn "pcmanfm")
   
         -- close all dunst notifs
         , ((modm,               xK_c     ), spawn "dunstctl close-all")
 
         -- kill picom
-        , ((modm,               xK_s     ), spawn "pkill picom")
-        , ((modm .|. shiftMask, xK_s     ), spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence")
+--      , ((modm,               xK_s     ), spawn "pkill picom")
+--      , ((modm .|. shiftMask, xK_s     ), spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence")
 
         -- mpc controls, volume adjustment
     
@@ -231,21 +233,18 @@ myManageHook = composeAll
     , className =? "Pavucontrol"        --> doFloat
 
     , resource  =? "sxiv"               --> doFloat
-    , resource  =? "org.gnome.Nautilus" --> doFloat
+    , resource  =? "pcmanfm"            --> doFloat
     , className =? "Gedit"              --> doFloat
 
     , resource  =? "desktop_window"     --> doIgnore
-    , resource  =? "kdesktop"           --> doIgnore
-    , isFullscreen                      --> (doF W.focusDown <+> doFullFloat)]
+    , resource  =? "kdesktop"           --> doIgnore ]
 
 
-------------------------------------------------------------------------
-myEventHook = mconcat [ fullscreenEventHook ]
-------------------------------------------------------------------------
-
+-- ok?
 myLogHook = return ()
 
-------------------------------------------------------------------------
+-- event hook
+myEventHook = mconcat []
 
 -- startup
 myStartupHook = do
@@ -258,14 +257,13 @@ myStartupHook = do
               spawn "feh --no-fehbg --bg-tile /home/furokku/.local/wallpaper/tiled8.png"
 
               spawnOnce "steam -silent"
-              spawnOnce "discord-canary"
+--            spawnOnce "discord-canary"
               spawnOnce "flameshot"
 
-              spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
               spawnOnce "numlockx"
-              spawnOnce "xrandr --output HDMI-A-0 --right-of DisplayPort-1 --output DisplayPort-1 --primary --output DVI-D-0 --left-of DisplayPort-1"
+              spawnOnce "xrandr --output HDMI-A-0 --right-of DisplayPort-1 --mode 1280x1024 --output DisplayPort-1 --primary --output DVI-D-0 --left-of DisplayPort-1"
 
-main = xmonad $ docks . ewmh $ defaults
+main = xmonad $ docks . ewmhFullscreen . ewmh $ defaults
 
 defaults = def {
       -- simple stuff
@@ -285,7 +283,7 @@ defaults = def {
       -- hooks, layouts
         layoutHook         = myLayout,
         manageHook         = myManageHook,
---      handleEventHook    = myEventHook,
+        handleEventHook    = myEventHook,
         logHook            = myLogHook,
         startupHook        = myStartupHook
 }
