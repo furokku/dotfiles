@@ -19,3 +19,5 @@ some wallpapers also included
 
 # install
 `yay -S xorg-xrandr xmonad-git xmonad-contrib-git polybar-git mpc mpd mpv numlockx xss-lock betterlockscreen-git rofi feh sxiv neovim alacritty pcmanfm-gtk3 lxappearance-gtk3 gedit pavucontrol font-terminus ttf-font-awesome ttf-ubuntu-font-family`
+
+"why so many packages it's bloated" shut up
