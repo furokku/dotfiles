@@ -15,3 +15,7 @@ picom got cut out from this config because of the issues it caused with window b
 dont yell at me if they dont work<br>some things are defined as absolute paths so change those
 
 some wallpapers also included
+
+
+# install
+`yay -S xorg-xrandr xmonad-git xmonad-contrib-git polybar-git mpc mpd mpv numlockx xss-lock betterlockscreen-git rofi feh sxiv neovim alacritty pcmanfm-gtk3 lxappearance-gtk3 gedit pavucontrol font-terminus ttf-font-awesome ttf-ubuntu-font-family`

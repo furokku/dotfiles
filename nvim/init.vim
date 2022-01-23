@@ -1,30 +1,32 @@
+" neovim thingy
 set runtimepath^=~/.config/nvim/
 let &packpath = &runtimepath
 
 
-" vundle
+" set the path for vundle and plugins and stuff
 set rtp+=~/.config/nvim/bundle/Vundle.vim
 call vundle#rc("~/.config/nvim/bundle")
 
+" actual plugins
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
 Plugin 'vim-syntastic/syntastic'
 Plugin 'preservim/nerdtree'
 Plugin 'morhetz/gruvbox'
+Plugin 'neoclide/coc.nvim'
 
 call vundle#end()
 
-" let g:airline_powerline_fonts = 1
-" let g:airline_theme='bubblegum'
+" set the vim-airline theme and optionally use powerline fonts if you have them
+"let g:airline_powerline_fonts = 1
+"let g:airline_theme='bubblegum'
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_w = 1
-let g:syntastic_check_on_wq = 0
-
+" gruvbox
 autocmd vimenter * ++nested colorscheme gruvbox
+
+" set background=light "setting light mode
+set background=dark "setting dark mode
 
 "Use 24-bit (true-color) mode in Vim/Neovim when outside tmux.
 "If you're using tmux version 2.2 or later, you can remove the outermost $TMUX check and use tmux's 24-bit color support
@@ -42,15 +44,34 @@ if (empty($TMUX))
   endif
 endif
 
-nnoremap <C-f> :NERDTreeToggle<CR>
+" nerdtree toggle keybind
+nnoremap <C-a> :NERDTreeToggle<CR>
 
+" make tabs 4 whitespaces
 set shiftwidth=4
 set softtabstop=4
 set expandtab
+
+" ??
 set nocompatible
+
+" make the cursor blink
+set guicursor=a:block-blinkon1
+
+" enable line numbers
 set number
+
+" enable syntasic stuff
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 set completefunc
+
 syntax on
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_w = 1
+let g:syntastic_check_on_wq = 0
+

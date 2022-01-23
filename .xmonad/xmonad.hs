@@ -256,14 +256,14 @@ myStartupHook = do
 --            spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence"
               spawn "feh --no-fehbg --bg-tile /home/furokku/.local/wallpaper/tiled8.png"
 
-              spawnOnce "steam -silent"
+--            spawnOnce "steam -silent"
 --            spawnOnce "discord-canary"
               spawnOnce "flameshot"
 
-              spawnOnce "numlockx"
+              spawnOnce "numlockx on"
               spawnOnce "xrandr --output HDMI-A-0 --right-of DisplayPort-1 --mode 1280x1024 --output DisplayPort-1 --primary --output DVI-D-0 --left-of DisplayPort-1"
 
-main = xmonad $ docks . ewmhFullscreen . ewmh $ defaults
+main = xmonad $ docks .ewmhFullscreen . ewmh $ defaults
 
 defaults = def {
       -- simple stuff
