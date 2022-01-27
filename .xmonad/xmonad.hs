@@ -5,7 +5,6 @@ import Graphics.X11.ExtraTypes.XF86
 
 import XMonad.Operations
 
-import XMonad.Layout.Gaps
 import XMonad.Layout.Spacing
 import XMonad.Layout.NoBorders
 
@@ -126,8 +125,11 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- Start Chrome
         , ((modm,               xK_b     ), spawn "chromium --wm-window-animations-disabled --ssl-version-min=tls1.2")
 
-        -- Take a screenshot
-        , ((0   ,               xK_Print ), spawn "flameshot gui")
+        -- Take a screenshot and save to file in ~/Pictures/Screenshots/
+        , ((0   .|. shiftMask,  xK_Print ), spawn "shotgun -g `hacksaw` \"/home/furokku/Pictures/Screenshots/`date +%A' '%T' '%b' '%e' '%Y`.png\"")
+
+        -- take a screenshot but copy to clipboard
+        , ((0   ,               xK_Print ), spawn "shotgun -g `hacksaw` - | xclip -t 'image/png' -sel clip")
 
         -- lock screen
         , ((modm,               xK_y     ), spawn "loginctl lock-session")
@@ -258,8 +260,9 @@ myStartupHook = do
 
 --            spawnOnce "steam -silent"
 --            spawnOnce "discord-canary"
-              spawnOnce "flameshot"
+--            spawnOnce "flameshot"
 
+              spawnOnce "xsetroot -cursor_name left_ptr"
               spawnOnce "numlockx on"
               spawnOnce "xrandr --output HDMI-A-0 --right-of DisplayPort-1 --mode 1280x1024 --output DisplayPort-1 --primary --output DVI-D-0 --left-of DisplayPort-1"
 
