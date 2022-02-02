@@ -57,7 +57,7 @@ myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
 -- Border colors for unfocused and focused windows, respectively.
 --
 myNormalBorderColor  = "#928374"
-myFocusedBorderColor = "#fabd2f"
+myFocusedBorderColor = "#ebdbb2"
 --myFocusedBorderColor = "#8a2be2"
 --myFocusedBorderColor = "#d3869b"
 --myFocusedBorderColor = "#fbec3b"
@@ -126,10 +126,10 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm,               xK_b     ), spawn "chromium --wm-window-animations-disabled --ssl-version-min=tls1.2")
 
         -- Take a screenshot and save to file in ~/Pictures/Screenshots/
-        , ((0   .|. shiftMask,  xK_Print ), spawn "shotgun -g `hacksaw` \"/home/furokku/Pictures/Screenshots/`date +%A' '%T' '%b' '%e' '%Y`.png\"")
+        , ((0   .|. shiftMask,  xK_Print ), spawn "shotgun -g `hacksaw -c 'ebdbb2'` \"/home/furokku/Pictures/Screenshots/`date +%A' '%T' '%b' '%e' '%Y`.png\"")
 
         -- take a screenshot but copy to clipboard
-        , ((0   ,               xK_Print ), spawn "shotgun -g `hacksaw` - | xclip -t 'image/png' -sel clip")
+        , ((0   ,               xK_Print ), spawn "shotgun -g `hacksaw -c 'ebdbb2'` - | xclip -t 'image/png' -sel clip")
 
         -- lock screen
         , ((modm,               xK_y     ), spawn "loginctl lock-session")
@@ -256,7 +256,7 @@ myStartupHook = do
 
               spawn "pkill xss-lock; xss-lock ~/.local/bin/lock.sh"
 --            spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence"
-              spawn "feh --no-fehbg --bg-tile /home/furokku/.local/wallpaper/tiled8.png"
+              spawn "feh --no-fehbg --bg-fill /home/furokku/.local/wallpaper/flowersbm.png"
 
 --            spawnOnce "steam -silent"
 --            spawnOnce "discord-canary"
