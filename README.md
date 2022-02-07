@@ -2,10 +2,13 @@
 these are the dotfiles that i use on my system.<br>included are: xmonad, rofi, neofetch, i3-gaps, i3status, dunst, alacritty, picom, polybar, neovim config files
 <br>pretty much just a basic gruvbox + xmonad config
 
-### xmonad
+## xmonad
 make sure you use xmonad 0.17, otherwise the config will not build because of the ewmhFullscreen option on line 266. remove that part in order to use on older versions (like 0.15)
 
-### chaotic-aur
+### sidenote about xmonad
+the way arch packages xmonad (and even the AUR) is odd and so every time you get updates for the haskell packages you'll have to rebuild the git versions of xmonad and xmonad-contrib (if you chose to install those in the first place)
+
+## chaotic-aur
 add the chaotic-aur repository to pacman in order to have some AUR packages already prebuilt for convenience
 
 ## dunst
