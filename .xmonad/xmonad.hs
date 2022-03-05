@@ -150,18 +150,18 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
 
         -- mpc controls, volume adjustment
     
-        , ((modm,               xK_F1    ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
-        , ((modm,               xK_F2    ), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
-        , ((modm,               xK_F3    ), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
-        , ((modm,               xK_F4    ), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
+        , ((modm .|. shiftMask, xK_d     ), spawn "pactl set-sink-mute @DEFAULT_SINK@ toggle")
+        , ((modm,               xK_minus ), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
+        , ((modm,               xK_equal ), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
+        , ((modm .|. shiftMask, xK_m     ), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
 
-        , ((modm,               xK_KP_Multiply), spawn "mpc toggle")
-        , ((modm,               xK_KP_Divide  ), spawn "mpc prev")
-        , ((modm,               xK_KP_Subtract), spawn "mpc next")
-        , ((modm .|. shiftMask, xK_KP_Divide  ), spawn "mpc seek -00:00:10")
-        , ((modm .|. shiftMask, xK_KP_Subtract), spawn "mpc seek +00:00:10")
-        , ((modm .|. shiftMask, xK_F2         ), spawn "mpc volume -5")
-        , ((modm .|. shiftMask, xK_F3         ), spawn "mpc volume +5")
+        , ((modm,               xK_o     ), spawn "mpc toggle")
+        , ((modm,               xK_i     ), spawn "mpc prev")
+        , ((modm,               xK_p     ), spawn "mpc next")
+        , ((modm .|. shiftMask, xK_i     ), spawn "mpc seek -00:00:10")
+        , ((modm .|. shiftMask, xK_p     ), spawn "mpc seek +00:00:10")
+        , ((modm,               xK_bracketleft ), spawn "mpc volume -5")
+        , ((modm,               xK_bracketright), spawn "mpc volume +5")
     ]
     ++
     -- mod-[1..9], Switch to workspace N
