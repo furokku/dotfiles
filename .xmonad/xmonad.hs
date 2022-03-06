@@ -75,8 +75,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- launch rofi 
         , ((modm,               xK_d     ), spawn "rofi -show run")
 
+        -- DEPRECATED: see xorg config file to change the layout now
         -- change kb layout
-        , ((modm,               xK_Home  ), spawn "i3-keyboard-layout cycle us ua ru")
+        -- , ((modm,               xK_Home  ), spawn "i3-keyboard-layout cycle us ua ru")
 
         -- close focused window
         , ((modm,               xK_q     ), kill)
