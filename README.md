@@ -1,5 +1,5 @@
 # dots
-these are the dotfiles that i use on my system.<br>included are: xmonad, rofi, neofetch, i3-gaps, i3status, dunst, alacritty, picom, polybar, neovim config files
+these are the dotfiles that i use on my system.<br>included are: xmonad, rofi, neofetch, i3-gaps, i3status, dunst, alacritty, picom, polybar, neovim etc. config files
 <br>pretty much just a basic gruvbox + xmonad config
 
 ## xmonad
