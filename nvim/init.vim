@@ -1,13 +1,10 @@
-" neovim thingy
+" set path to ~/.config/nvim instead of ~/.vim
 set runtimepath^=~/.config/nvim/
-let &packpath = &runtimepath
-
-
-" set the path for vundle and plugins and stuff
+let &packpath=&runtimepath
 set rtp+=~/.config/nvim/bundle/Vundle.vim
-call vundle#rc("~/.config/nvim/bundle")
 
-" actual plugins
+" vundle plugin stuff
+call vundle#rc("~/.config/nvim/bundle")
 Plugin 'VundleVim/Vundle.vim'
 Plugin 'vim-airline/vim-airline'
 Plugin 'vim-airline/vim-airline-themes'
@@ -15,14 +12,14 @@ Plugin 'vim-syntastic/syntastic'
 Plugin 'preservim/nerdtree'
 Plugin 'morhetz/gruvbox'
 Plugin 'neoclide/coc.nvim'
-
 call vundle#end()
 
 " set the vim-airline theme and optionally use powerline fonts if you have them
-"let g:airline_powerline_fonts = 1
+"let g:airline_powerline_fonts=1
 "let g:airline_theme='bubblegum'
 
 " gruvbox
+let g:gruvbox_contrast_dark='hard'
 autocmd vimenter * ++nested colorscheme gruvbox
 
 " set background=light "setting light mode
@@ -46,6 +43,8 @@ endif
 
 " nerdtree toggle keybind
 nnoremap <C-a> :NERDTreeToggle<CR>
+" bind to clear last search
+nnoremap <C-c> :let @/=""<CR>
 
 " make tabs 4 whitespaces
 set shiftwidth=4
@@ -69,9 +68,8 @@ set completefunc
 
 syntax on
 
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_w = 1
-let g:syntastic_check_on_wq = 0
-
+let g:syntastic_always_populate_loc_list=1
+let g:syntastic_auto_loc_list=1
+let g:syntastic_check_on_open=1
+let g:syntastic_check_on_w=1
+let g:syntastic_check_on_wq=0
