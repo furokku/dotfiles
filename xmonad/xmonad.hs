@@ -1,5 +1,6 @@
 import XMonad
 import Data.Monoid
+import Data.Ratio
 import System.Exit
 import Graphics.X11.ExtraTypes.XF86
 
@@ -238,7 +239,7 @@ myManageHook = composeAll
     [ className =? "mpv"                --> doFloat
     , className =? "Pavucontrol"        --> doFloat
 
-    , resource  =? "vimiv"              --> doFloat
+    , resource  =? "vimiv"              --> doRectFloat (W.RationalRect (1%4) (1%4) (1%2) (1%2))
     , resource  =? "pcmanfm"            --> doFloat
     , resource  =? "file-roller"        --> doFloat
     , className =? "Gedit"              --> doFloat
