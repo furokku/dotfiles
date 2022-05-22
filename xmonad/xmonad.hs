@@ -239,7 +239,7 @@ myManageHook = composeAll
     [ className =? "mpv"                --> doFloat
     , className =? "Pavucontrol"        --> doFloat
 
-    , resource  =? "vimiv"              --> doRectFloat (W.RationalRect (1%4) (1%4) (1%2) (1%2))
+    , resource  =? "nsxiv"              --> doFloat
     , resource  =? "pcmanfm"            --> doFloat
     , resource  =? "file-roller"        --> doFloat
     , className =? "Gedit"              --> doFloat
