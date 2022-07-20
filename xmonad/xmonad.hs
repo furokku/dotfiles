@@ -55,7 +55,7 @@ myModMask       = mod1Mask
 --
 -- > workspaces = ["web", "irc", "code" ] ++ map show [4..9]
 --
-myWorkspaces    = ["1","2","3","4","5","6","7","8","9"]
+myWorkspaces    = ["1","2","3","4","5","6","7","8","9","10"]
 
 -- Border colors for unfocused and focused windows, respectively.
 --
@@ -114,8 +114,9 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- Use this binding with avoidStruts from Hooks.ManageDocks.
         -- See also the statusBar function from Hooks.DynamicLog.
         --
-        , ((modm .|. shiftMask, xK_b     ), sendMessage ToggleStruts       )
-        , ((modm .|. controlMask, xK_b   ), spawn "polybar-msg cmd toggle" )        
+        -- , ((modm .|. shiftMask, xK_b     ), sendMessage ToggleStruts       )
+        -- , ((modm .|. controlMask, xK_b   ), spawn "polybar-msg cmd toggle" )        
+        , ((modm .|. shiftMask, xK_b   ), spawn "polybar-msg cmd toggle" )        
 
         -- display logout menu
         , ((modm .|. shiftMask, xK_q     ), spawn "rofi -show p -modi p:~/.config/rofi/rofi-power-menu")
@@ -127,20 +128,23 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm .|. controlMask, xK_q   ), spawn "xmonad --recompile; xmonad --restart")
 
         -- add later to flags:  --use-fake-device-for-media-stream
-        -- Start Chromium(!)
-        , ((modm,               xK_b     ), spawn "chromium --block-new-web-contents --disable-background-networking --disable-breakpad --disable-composited-antialiasing --disable-crash-reporter --disable-default-apps --disable-domain-reliability --disable-external-intent-requests --disable-file-system --disable-webgl --gpu-rasterization-msaa-sample-count=0 --lite-video-force-override-decision --no-pings --num-raster-threads=4 --process-per-site --site-per-process --time-zone-for-testing=UTC --enable-features=\"VaapiVideoEncoder,VaapiVideoDecoder,BlockInsecurePrivateNetworkRequests,BlockInsecurePrivateNetworkRequestsForNavigations,BrowserDynamicCodeDisabled,DesktopScreenshots,DisableProcessReuse,ElementSuperRareData,EnableCsrssLockdown,EncryptedClientHello,ForceIsolationInfoFrameOriginToTopLevelFrame,GpuAppContainer,ImprovedCookieControls,IntensiveWakeUpThrottling:grace_period_seconds/10,IsolateOrigins,IsolatePrerenders,IsolateSandboxedIframes,MinimizeAudioProcessingForUnusedOutput,NetworkServiceSandbox,NetworkServiceCodeIntegrity,OpaqueResponseBlockingV01,OriginIsolationHeader,PartitionConnectionsByNetworkIsolationKey,PartitionDomainReliabilityByNetworkIsolationKey,PartitionExpectCTStateByNetworkIsolationKey,PartitionHttpServerPropertiesByNetworkIsolationKey,PartitionNelAndReportingByNetworkIsolationKey,PartitionSSLSessionsByNetworkIsolationKey,PartitionedCookies,PostQuantumCECPQ2,PrefetchPrivacyChanges,ReducedReferrerGranularity,RendererAppContainer,RestrictGamepadAccess,SandboxExternalProtocolBlocked,SandboxHttpCache,ScopeMemoryCachePerContext,SplitAuthCacheByNetworkIsolationKey,SplitCacheByIncludeCredentials,SplitCacheByNetworkIsolationKey,SplitHostCacheByNetworkIsolationKey,StrictOriginIsolation,SuppressDifferentOriginSubframeJSDialogs,ThirdPartyStoragePartitioning,ThrottleForegroundTimers,TurnOffStreamingMediaCachingAlways,TurnOffStreamingMediaCachingOnBattery,UseRegistrableDomainInNetworkIsolationKey,WinSboxDisableExtensionPoint,WinSboxDisableKtmComponent\" --disable-features=\"AcceptCHFrame,AdInterestGroupAPI,AllowClientHintsToThirdParty,AllowURNsInIframes,AppActivityReporting,AppDiscoveryRemoteUrlSearch,AutofillEnableAccountWalletStorage,AutofillServerCommunication,AutoupgradeMixedContent,BrowsingTopics,ClearCrossSiteCrossBrowsingContextGroupWindowName,ClientHintThirdPartyDelegation,ClientHintsDPR,ClientHintsDPR_DEPRECATED,ClientHintsDeviceMemory,ClientHintsDeviceMemory_DEPRECATED,ClientHintsMetaHTTPEquivAcceptCH,ClientHintsMetaNameAcceptCH,ClientHintsResourceWidth,ClientHintsResourceWidth_DEPRECATED,ClientHintsViewportWidth,ClientHintsViewportWidth_DEPRECATED,ComputePressure,ContextMenuPerformanceInfoAndRemoteHintFetching,ConversionMeasurement,CopyLinkToText,CrashReporting,CriticalClientHint,CrossOriginOpenerPolicyAccessReporting,CrossOriginOpenerPolicyReporting,CrossOriginOpenerPolicyReportingOriginTrial,CrostiniAdditionalEnterpriseReporting,CssSelectorFragmentAnchor,DirectSockets,DocumentReporting,EnableSignedExchangePrefetchCacheForNavigations,EnableSignedExchangeSubresourcePrefetch,EnableStructuredMetrics,EnableSubresourceWebBundles,EnterpriseRealtimeExtensionRequest,EventBasedStatusReporting,ExpectCTReporting,ExperimentalJSProfiler,EnableTLS13EarlyData,FedCm,Fledge,FontAccess,FontAccessPersistent,GreaseUACH,HandwritingRecognitionWebPlatformApiFinch,IdleDetection,InterestGroupStorage,Journeys,LensStandalone,MediaDrmPreprovisioning,MediaEngagementBypassAutoplayPolicies,NTPArticleSuggestions,NetworkTimeServiceQuerying,NotificationTriggers,OmniboxTriggerForNoStatePrefetch,OptimizationHints,OptimizationHintsFetching,OptimizationHintsFetchingAnonymousDataConsent,OptimizationHintsFieldTrials,Parakeet,Prerender2,PrefersColorSchemeClientHintHeader,PreloadMediaEngagementData,ReportAllJavaScriptFrameworks,Reporting,RetailCoupons,SegmentationPlatform,SignedExchangeReportingForDistributors,SpeculationRulesPrefetchProxy,SubresourceWebBundles,TabMetricsLogging,TFLiteLanguageDetectionEnabled,TextFragmentAnchor,SafeBrowsingBetterTelemetryAcrossReports,UACHPlatformEnabledByDefault,UserAgentClientHint,UserAgentClientHintFullVersionList,UsernameFirstFlow,UsernameFirstFlowFilling,UsernameFirstFlowFallbackCrowdsourcing,ViewportHeightClientHintHeader,WebNFC,WebOTP,WebSQLInThirdPartyContextEnabled,WebXR,WinrtGeolocationImplementation,WinrtSensorsImplementation\" --connectivity-check-url=0.0.0.0 --crash-server-url=0.0.0.0 --gaia-url=0.0.0.0 --gcm-checkin-url=0.0.0.0 --gcm-mcs-endpoint=0.0.0.0 --gcm-registration-url=0.0.0.0 --google-apis-url=0.0.0.0 --google-base-url=0.0.0.0 --google-doodle-url=0.0.0.0 --lso-url=0.0.0.0 --oauth-account-manager-url=0.0.0.0 --override-metrics-upload-url=0.0.0.0 --realtime-reporting-url=0.0.0.0 --reporting-connector-url=0.0.0.0 --sync-url=0.0.0.0 --url=0.0.0.0 --variations-server-url=0.0.0.0 --variations-insecure-server-url=0.0.0.0 --cipher-suite-blacklist=\"0xc013,0xc014,0x009c,0x009d,0x002f,0x0035\" --enable-strict-mixed-content-checking --js-flags=--jitless --blink-settings=\"dnsPrefetchingEnabled=false,preferredColorScheme=1,strictMixedContentChecking=true,strictMixedContentCheckingForPlugin=true,strictlyBlockBlockableMixedContent=true\" --disable-blink-features=\"PrefersContrast,GravitySensor\" --test-type")
+        -- Start Chromium
+        , ((modm,               xK_b     ), spawn "chromium")
 
         -- Take a screenshot and save to file in ~/Pictures/Screenshots/
         , ((0   .|. shiftMask,  xK_Print ), spawn "shotgun -g `hacksaw -c 'ebdbb2'` \"/home/furokku/Pictures/Screenshots/ss_`date +%Y%m%d' '%H%M%S`.png\"")
 
         -- take a screenshot but copy to clipboard
-        , ((0   ,               xK_Print ), spawn "shotgun -g `hacksaw -c 'ebdbb2'` - | xclip -t 'image/png' -sel clip")
+        , ((0   ,               xK_Print ), spawn "shotgun -g `hacksaw -c 'ebdbb2'` - | xclip -t image/png -sel clip")
+
+        -- take a screenshot of the current window and copy it to the clipboard
+        , ((0   .|. controlMask, xK_Print), spawn "shotgun -i `xdotool getactivewindow` - | xclip -t image/png -sel clip")
 
         -- lock screen
         , ((modm,               xK_y     ), spawn "loginctl lock-session")
     
         -- redshift
-        , ((modm,               xK_z     ), spawn "redshift -O 4500K")
+        , ((modm,               xK_z     ), spawn "redshift -O 5000K")
         , ((modm,               xK_x     ), spawn "redshift -x")
     
         -- start file manager
@@ -159,6 +163,7 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm,               xK_minus ), spawn "pactl set-sink-volume @DEFAULT_SINK@ -5%" )
         , ((modm,               xK_equal ), spawn "pactl set-sink-volume @DEFAULT_SINK@ +5%" )
         , ((modm .|. shiftMask, xK_m     ), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
+        , ((0   ,          xK_Scroll_Lock), spawn "pactl set-source-mute @DEFAULT_SOURCE@ toggle")
 
         , ((modm,               xK_o     ), spawn "mpc toggle")
         , ((modm,               xK_i     ), spawn "mpc prev")
@@ -192,6 +197,13 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         , ((modm,               xK_h     ), windows W.swapUp   )
         , ((modm,               xK_l     ), windows W.swapDown )
     ]
+    ++
+    [
+        -- switch / move window to workspace 10
+          ((modm,                 xK_0     ), windows $ W.greedyView "10")
+        , ((modm .|. shiftMask,   xK_0     ), windows $ W.shift "10")
+    ]
+
 
 ------------------------------------------------------------------------
 -- Mouse bindings: default actions bound to mouse events
@@ -269,6 +281,7 @@ myStartupHook = do
 --            spawnOnce "discord-canary"
 --            spawnOnce "flameshot"
 
+              spawnOnce "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"
               spawnOnce "xsetroot -cursor_name left_ptr"
               spawnOnce "numlockx on"
               spawnOnce "xrandr --output DisplayPort-1 --primary --mode 1920x1080 --output HDMI-A-0 --right-of DisplayPort-1 --mode 1280x1024 --output DVI-D-0 --left-of DisplayPort-1 --mode 1280x1024"
