@@ -114,9 +114,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- Use this binding with avoidStruts from Hooks.ManageDocks.
         -- See also the statusBar function from Hooks.DynamicLog.
         --
-        -- , ((modm .|. shiftMask, xK_b     ), sendMessage ToggleStruts       )
-        -- , ((modm .|. controlMask, xK_b   ), spawn "polybar-msg cmd toggle" )        
-        , ((modm .|. shiftMask, xK_b   ), spawn "polybar-msg cmd toggle" )        
+        , ((modm .|. shiftMask, xK_b     ), sendMessage ToggleStruts       )
+        , ((modm .|. controlMask, xK_b   ), spawn "polybar-msg cmd toggle" )        
 
         -- display logout menu
         , ((modm .|. shiftMask, xK_q     ), spawn "rofi -show p -modi p:~/.config/rofi/rofi-power-menu")
@@ -310,3 +309,4 @@ defaults = def {
         logHook            = myLogHook,
         startupHook        = myStartupHook
 }
+
