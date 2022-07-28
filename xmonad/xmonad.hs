@@ -7,7 +7,10 @@ import Graphics.X11.ExtraTypes.XF86
 import XMonad.Operations
 
 import XMonad.Layout.Spacing
+import XMonad.Layout.Gaps
 import XMonad.Layout.NoBorders
+import XMonad.Layout.Tabbed
+import XMonad.Layout.BinarySpacePartition
 
 import XMonad.Hooks.EwmhDesktops
 import XMonad.Hooks.ManageDocks
@@ -115,16 +118,15 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- See also the statusBar function from Hooks.DynamicLog.
         --
         , ((modm .|. shiftMask, xK_b     ), sendMessage ToggleStruts       )
-        , ((modm .|. controlMask, xK_b   ), spawn "polybar-msg cmd toggle" )        
 
         -- display logout menu
-        , ((modm .|. shiftMask, xK_q     ), spawn "rofi -show p -modi p:~/.config/rofi/rofi-power-menu")
+        , ((modm .|. shiftMask, xK_x     ), spawn "rofi -show p -modi p:~/.config/rofi/rofi-power-menu")
 
         -- Quit xmonad
         -- , ((modm .|. shiftMask, xK_e     ), io (exitWith ExitSuccess))
 
         -- Restart xmonad
-        , ((modm .|. controlMask, xK_q   ), spawn "xmonad --recompile; xmonad --restart")
+        , ((modm .|. shiftMask, xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
         -- add later to flags:  --use-fake-device-for-media-stream
         -- Start Chromium
@@ -199,8 +201,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
     ++
     [
         -- switch / move window to workspace 10
-          ((modm,                 xK_0     ), windows $ W.greedyView "10")
-        , ((modm .|. shiftMask,   xK_0     ), windows $ W.shift "10")
+          ((modm,                 xK_0   ), windows $ W.greedyView "10")
+        , ((modm .|. shiftMask,   xK_0   ), windows $ W.shift "10")
     ]
 
 
@@ -235,10 +237,21 @@ myMouseBindings (XConfig {XMonad.modMask = modm}) = M.fromList $
 -- which denotes layout choice.
 --
 
+myTabConfig = def {
+    activeTextColor     = "#ebdbb2",
+    activeColor         = "#282828",
+    activeBorderColor   = "#b8bb26",
+    inactiveTextColor   = "#3c3836",
+    inactiveColor       = "#1d2021",
+    inactiveBorderColor = "#fb4934",
+    fontName            = "xft:Terminus:size=12"
+}
 
-myLayout = avoidStruts (tiled ||| noBorders Full)
+myLayout = avoidStruts (bsp ||| cTabbed ||| noBorders Full)
   where
-     tiled   = spacing 6 $ Tall nmaster delta ratio
+     tiled   = spacing 6 $ Tall nmaster delta ratio -- not using right now
+     cTabbed = gaps [(U,6), (D,6), (L,6), (R,6)] $ tabbed shrinkText myTabConfig
+     bsp     = spacing 6 $ emptyBSP
      nmaster = 1
      ratio   = 1/2
      delta   = 3/100
