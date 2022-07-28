@@ -38,7 +38,7 @@ icons[shutdown]="\uf011"
 icons[cancel]="\uf00d"
 
 declare -A actions
-actions[lockscreen]="loginctl lock-session}"
+actions[lockscreen]="loginctl lock-session"
 #actions[switchuser]="???"
 actions[logout]="pkill X"
 actions[suspend]="systemctl suspend"
