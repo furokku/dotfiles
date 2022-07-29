@@ -24,6 +24,16 @@ import XMonad.Util.EZConfig
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+toggleFullLayout :: XConfig Layout -> X()
+toggleFullLayout conf@(XConfig {XMonad.layoutHook = xLayoutHook}) = do
+    winset <- gets windowset
+    let ld = description . W.layout . W.workspace . W.current $ winset
+    if ld /= "Full"
+        then do 
+            sendMessage $ JumpToLayout "Full"
+            sendMessage $ SetStruts [] [U]
+        else setLayout $ XMonad.layoutHook conf
+
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
 --
@@ -36,7 +46,7 @@ myFocusFollowsMouse = True
 
 -- Whether clicking on a window to focus also passes the click to the window
 myClickJustFocuses :: Bool
-myClickJustFocuses = False
+myClickJustFocuses = True
 
 -- Width of the window border in pixels.
 --
@@ -81,10 +91,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- launch rofi 
         , ((modm,               xK_d     ), spawn "rofi -show run")
 
-        -- DEPRECATED: see xorg config file to change the layout now
-        -- change kb layout
-        -- , ((modm,               xK_Home  ), spawn "i3-keyboard-layout cycle us ua ru")
-
         -- close focused window
         , ((modm,               xK_q     ), kill)
 
@@ -94,9 +100,8 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         --  Reset the layouts on the current workspace to default
         , ((modm .|. shiftMask, xK_space ), setLayout $ XMonad.layoutHook conf)
 
-        -- Resize viewed windows to the correct size
-        -- i don[t even know what this does
-        , ((modm,               xK_g     ), refresh)
+        -- toggle fullscreen layout
+        , ((modm,               xK_f     ), toggleFullLayout conf)
 
         -- Shrink the master area
         , ((modm .|. shiftMask, xK_h     ), sendMessage Shrink)
@@ -128,7 +133,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
         -- Restart xmonad
         , ((modm .|. shiftMask, xK_q     ), spawn "xmonad --recompile; xmonad --restart")
 
-        -- add later to flags:  --use-fake-device-for-media-stream
         -- Start Chromium
         , ((modm,               xK_b     ), spawn "chromium")
 
@@ -153,10 +157,6 @@ myKeys conf@(XConfig {XMonad.modMask = modm}) = M.fromList $
   
         -- close all dunst notifs
         , ((modm,               xK_c     ), spawn "dunstctl close-all")
-
-        -- kill picom
---      , ((modm,               xK_s     ), spawn "pkill picom")
---      , ((modm .|. shiftMask, xK_s     ), spawn "picom --use-ewmh-active-win --experimental-backends --glx-no-stencil --xrender-sync-fence")
 
         -- mpc controls, volume adjustment
     
@@ -249,7 +249,7 @@ myTabConfig = def {
 
 myLayout = avoidStruts (bsp ||| cTabbed ||| noBorders Full)
   where
-     tiled   = spacing 6 $ Tall nmaster delta ratio -- not using right now
+     tiled   = spacing 6 $ Tall nmaster delta ratio -- not using
      cTabbed = gaps [(U,6), (D,6), (L,6), (R,6)] $ tabbedBottom shrinkText myTabConfig
      bsp     = spacing 6 $ emptyBSP
      nmaster = 1
@@ -262,6 +262,7 @@ myLayout = avoidStruts (bsp ||| cTabbed ||| noBorders Full)
 myManageHook = composeAll
     [ className =? "mpv"                --> doFloat
     , className =? "Pavucontrol"        --> doFloat
+    , className =? "Songrec"            --> doFloat
 
     , resource  =? "nsxiv"              --> doFloat
     , resource  =? "pcmanfm"            --> doFloat
