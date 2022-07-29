@@ -250,7 +250,7 @@ myTabConfig = def {
 myLayout = avoidStruts (bsp ||| cTabbed ||| noBorders Full)
   where
      tiled   = spacing 6 $ Tall nmaster delta ratio -- not using right now
-     cTabbed = gaps [(U,6), (D,6), (L,6), (R,6)] $ tabbed shrinkText myTabConfig
+     cTabbed = gaps [(U,6), (D,6), (L,6), (R,6)] $ tabbedBottom shrinkText myTabConfig
      bsp     = spacing 6 $ emptyBSP
      nmaster = 1
      ratio   = 1/2
