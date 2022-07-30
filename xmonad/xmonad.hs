@@ -25,14 +25,14 @@ import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
 toggleFullLayout :: XConfig Layout -> X()
-toggleFullLayout conf@(XConfig {XMonad.layoutHook = xLayoutHook}) = do
+toggleFullLayout conf@(XConfig {XMonad.layoutHook = defaultLayoutHook}) = do
     winset <- gets windowset
     let ld = description . W.layout . W.workspace . W.current $ winset
     if ld /= "Full"
         then do 
             sendMessage $ JumpToLayout "Full"
-            sendMessage $ SetStruts [] [U]
-        else setLayout $ XMonad.layoutHook conf
+            sendMessage $ SetStruts [] [U,D,L,R]
+        else setLayout defaultLayoutHook
 
 -- The preferred terminal program, which is used in a binding below and by
 -- certain contrib modules.
