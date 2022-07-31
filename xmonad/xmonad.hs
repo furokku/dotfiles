@@ -24,6 +24,8 @@ import XMonad.Util.EZConfig
 import qualified XMonad.StackSet as W
 import qualified Data.Map        as M
 
+-- Function to, well, toggle the Full layout on a workspace
+--
 toggleFullLayout :: XConfig Layout -> X()
 toggleFullLayout conf@(XConfig {XMonad.layoutHook = defaultLayoutHook}) = do
     winset <- gets windowset
@@ -250,7 +252,7 @@ myTabConfig = def {
 myLayout = avoidStruts (bsp ||| cTabbed ||| noBorders Full)
   where
      tiled   = spacing 6 $ Tall nmaster delta ratio -- not using
-     cTabbed = gaps [(U,6), (D,6), (L,6), (R,6)] $ tabbedBottom shrinkText myTabConfig
+     cTabbed = gaps (zip [U,D,L,R] (repeat 6)) $ tabbedBottom shrinkText myTabConfig
      bsp     = spacing 6 $ emptyBSP
      nmaster = 1
      ratio   = 1/2
