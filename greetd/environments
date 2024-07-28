@@ -1,0 +1,1 @@
+xinit xmonad -- :0 vt$XDG_VTNR

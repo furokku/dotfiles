@@ -1,0 +1,12 @@
+# `-l` activates layer-shell mode. Notice that `swaymsg exit` will run after gtkgreet.
+
+bindsym Mod1+shift+e exec swaynag \
+-t warning \
+-m 'What do you want to do?' \
+-b 'Poweroff' 'systemctl poweroff' \
+-b 'Reboot' 'systemctl reboot'
+
+exec "GTK_THEME=Adapta-Green-Nokto-Eta gtkgreet -l; swaymsg exit"
+
+include /etc/greetd/sway-output-config
+include /etc/sway/config.d/*

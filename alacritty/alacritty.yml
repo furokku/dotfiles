@@ -1,4 +1,4 @@
-background_opacity: 0.91
+# background_opacity: 0.91
 
 env:
   TERM: xterm-256color
@@ -6,22 +6,20 @@ env:
 window:
   padding:
     x: 3
-    y: 2
+    y: 4
   title: Alacritty
+  decorations: none
 
 cursor:
   style:
-    shape: Block
-    blinking: On
-    blink_rate: 3
+    blinking: Always
+  blink_interval: 500
+  blink_timeout: 0
 
 font:
   normal:
     family: Terminus
     style: Regular
-  bold:
-    family: Terminus
-    style: Bold
   italic:
     family: Terminus
     style: Italic
@@ -32,7 +30,7 @@ font:
   
 colors:
   primary:
-    background: '0x282828'
+    background: '0x1d2021'
     foreground: '0xebddb2'
     dim_foreground: '#a89984'
     bright_foreground: '#fbf1c7'

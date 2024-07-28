@@ -1,0 +1,4 @@
+output * disable
+output DP-2 enable
+output DP-2 mode 1920x1080
+output DP-2 pos 0 0
